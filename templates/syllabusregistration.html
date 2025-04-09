@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>履修登録</title>
+  <link rel="stylesheet" href="../static/css/syllabusregistration.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/header.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo"></div>
+    <div class="nav-links">
+        <a href="./html/mypage.html">マイページ</a>
+        <a href="#">シラバス一覧</a>
+        <a href="#">シラバス登録</a>
+        <a href="#">TODOリスト登録</a>
+    </div>
+    <a href="#" class="logout">ログアウト</a>
+</header>
+
+  <title1>
+    <h1>履修登録</h1>
+    <span class="highlight">2025後期履修登録</span>
+  </title1>
+
+  <div class="container">
+    <div class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th>コマ＼曜日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1限</th>
+            <td id="mon1"></td><td id="tue1"></td><td id="wed1"></td><td id="thu1"></td><td id="fri1"></td>
+          </tr>
+          <tr>
+            <th>2限</th>
+            <td id="mon2"></td><td id="tue2"></td><td id="wed2"></td><td id="thu2"></td><td id="fri2"></td>
+          </tr>
+          <tr>
+            <th>3限</th>
+            <td id="mon3"></td><td id="tue3"></td><td id="wed3"></td><td id="thu3"></td><td id="fri3"></td>
+          </tr>
+          <tr>
+            <th>4限</th>
+            <td id="mon4"></td><td id="tue4"></td><td id="wed4"></td><td id="thu4"></td><td id="fri4"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="submit-button">履修確定</button>
+    </div>
+    <div class="search-section">
+  <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
+</div>
+  </div>
+
+</body>
+</html>
