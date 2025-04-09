@@ -5,4 +5,7 @@ timetable = Blueprint('timetable', __name__)
 
 @timetable.route('/course_register')
 def course_register():
-    return render_template('course_register.html')
+    
+    subject_list = db.get_subjects()
+    
+    return render_template('course_register.html' , subject_list=subject_list)
