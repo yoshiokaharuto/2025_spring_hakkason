@@ -8,7 +8,10 @@ const data = [
   { subject: "システム設計論6", koma: 160, absent: 1 },
   { subject: "システム設計論7", koma: 160, absent: 0 },
   { subject: "システム設計論8", koma: 160, absent: 2 },
-  { subject: "システム設計論9", koma: 160, absent: 0 }, // ←ここまでで奇数件
+  { subject: "システム設計論9", koma: 160, absent: 0 },
+  { subject: "システム設計論7", koma: 160, absent: 0 },
+  { subject: "システム設計論8", koma: 160, absent: 2 },
+  { subject: "システム設計論9", koma: 160, absent: 0 },
 ];
 
 const leftTable = document.getElementById("leftTable");
