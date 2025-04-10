@@ -2,9 +2,9 @@ from flask import Flask, render_template, redirect, url_for, Blueprint, request,
 import db
 
 
-timetable = Blueprint('timetable', __name__)
+timetable_bp = Blueprint('timetable', __name__)
 
-@timetable.route('/course_register')
+@timetable_bp.route('/course_register')
 def course_register():
     
     subject_list = db.get_subjects()
