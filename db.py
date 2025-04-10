@@ -43,13 +43,13 @@ def insert_user(name, email, password, grade, department_id):
     sql = 'INSERT INTO accounts (name, email, password_hash, salt, grade, department_id) VALUES (%s, %s, %s, %s, %s, %s)'
     salt = get_salt()
     hashed_password = get_hash(password, salt)
-    count = 0  # 正常時も count を初期化
+    count = 0  
     try:
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (name, email, hashed_password, salt, grade, department_id))
         connection.commit()
-        count = cursor.rowcount  # 実際に影響を受けた行数を取得
+        count = cursor.rowcount  
     except psycopg2.DatabaseError as e:
         print(f"Database error: {e}")
     finally:

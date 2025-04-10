@@ -47,7 +47,7 @@ def register_complete():
     if count == 1:
         msg = '登録が完了しました。'
         session.clear() 
-        return render_template('login.html', msg=msg)
+        return redirect(url_for('index'))
     else:
         error = '登録に失敗しました。'
         return render_template('register.html', error=error)
