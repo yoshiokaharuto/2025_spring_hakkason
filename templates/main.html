@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>時間割画面</title>
+  <link rel="stylesheet" href="../static/css/allstyle.css">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/header.css">
+</head>
+<body>
+
+<header>
+  <div class="logo"></div>
+  <div class="nav-links">
+    <a href="./html/mypage.html">マイページ</a>
+    <a href="#">シラバス一覧</a>
+    <a href="#">シラバス登録</a>
+    <a href="#">TODOリスト登録</a>
+  </div>
+  <a href="#" class="logout">ログアウト</a>
+</header>
+
+<div class="container">
+  <div class="left">
+    <div id="date">xxxx/xx/x(x)</div>
+
+    <!-- 曜日 -->
+    <div class="days-row">
+      <div class="day mon">月</div>
+      <div class="day tue">火</div>
+      <div class="day wed">水</div>
+      <div class="day thu">木</div>
+      <div class="day fri">金</div>
+    </div>
+    
+
+    <div class="timetable-wrapper">
+      <!-- 時間 -->
+      <div class="time-column">
+        <div class="first-time">9:30</div>
+        <div class="second-time">11:10</div>
+        <div class="third-time">13:40</div>
+        <div class="fourth-time">15:20</div>
+      </div>
+
+      <!-- 表本体 -->
+      <table class="timetable">
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="todo-box" id="todo-list">
+      <P>こんにちは、あなたの健康を守ります。</p>
+    </div>
+
+    <div class="attendance-box" id="attendance-status">
+      <h3>出席状況</h3>
+      <p>情報システム概論：</p>
+      <p>システム開発演習：</p>
+      <p>システム開発実践：</p>
+      <p>キャリアデザイン：</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

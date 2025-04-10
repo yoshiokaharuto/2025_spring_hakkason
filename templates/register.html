@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント登録</title>
+    <link rel="stylesheet" href="../static/css/allstyle.css">
+    <link rel="stylesheet" href="../static/css/registr.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="return_button" href="/">
+        <img src="/static/img/return_button.png" alt="戻る" width="100px">
+    </a>
+      
+    <div class="container">
+        <h1>アカウント登録</h1>
+        <form method="POST" action="{{url_for('register_exe')}}">
+            <table>
+                <tr>
+                    <td>
+                        <select name="year" class="short" required>
+                            <option value="">学年</option>
+                            <option value="1">1学年</option>
+                            <option value="2">２学年</option>
+                            <option value="3">３学年</option>
+                            <option value="4">４学年</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="department" class="short" required>
+                            <option value="">学科</option>
+                            <option value="1">情報システム科</option>
+                            <option value="2">総合システム工学科</option>
+                            <option value="3">高度情報工学科</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="name" class="short" placeholder="名前" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="email" name="email" class="long" placeholder="メールアドレス" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" name="password" class="long" placeholder="パスワード" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" name="confirm_password" class="long" placeholder="パスワード（確認）" required>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="submit-button">作成</button>
+        </form>
+    </div>
+</body>
+</html>
