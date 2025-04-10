@@ -18,7 +18,7 @@
         <a href="#">TODOリスト登録</a>
     </div>
     <a href="#" class="logout">ログアウト</a>
-</header>
+  </header>
 
   <title1>
     <h1>履修登録</h1>
@@ -76,10 +76,23 @@
 
       <button class="submit-button">履修確定</button>
     </div>
-    <div class="search-section">
-  <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
-</div>
+      <div class="search-section">
+        <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
+      </div>
   </div>
 
+
+  <script>
+     const subjectList = [ 
+            { id: "1", name: "プログラミング", 
+            schedule: [1,7,15]}, 
+            { id: "2", name: "英語", 
+            schedule: [ 6 ] }, 
+            { id: "3", name: "数学", 
+            schedule: [ 19 ] } 
+            ]; 
+    document.querySelectorAll(".subject-check").forEach(checkbox => {checkbox.addEventListener("change", () => const subject = subjectList.find(s => s.id === checkbox.value);
+    )})
+  </script>
 </body>
 </html>
