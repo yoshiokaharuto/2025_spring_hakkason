@@ -101,7 +101,7 @@ th {
 
 .submit-button {
   display: block;
-  margin: 30px auto;
+  margin: 18px auto;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4db6ac;
@@ -121,4 +121,7 @@ th {
 
 .search-results p {
   margin: 5px 0;
+}
+li{
+  list-style:none;
 }
