@@ -99,6 +99,11 @@
           li.textContent = subject.name;
           li.setAttribute("data-subject-id",subject.id);
           ul.appendChild(li);
+        } else {
+          const liToRemove = ul.querySelector(`li[data-subject-id="${subject.id}"]`);
+          if (liToRemove) {
+            ul.removeChild(liToRemove);
+          }
         }
     )})
   </script>
