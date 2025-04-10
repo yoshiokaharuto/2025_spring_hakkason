@@ -1,0 +1,7 @@
+body {
+  font-size: 32px; /* デフォルトの文字サイズ */
+  background-color: #f5f5f5; /* 背景色 */
+  font-family: "Noto Sans JP", sans-serif; /* フォント */
+  margin: 0;
+  padding: 0;
+}
