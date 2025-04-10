@@ -58,3 +58,36 @@ def insert_user(name, email, password, grade, department_id):
         if connection:
             connection.close()
         return count
+
+
+def login(email, password):
+    sql = 'SELECT hashed_password, salt FROM accounts WHERE email = %s'
+    flg = False
+    connection = None
+    cursor = None
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (email,))
+        user = cursor.fetchone()
+        
+        if user:
+            salt = user[1]
+            hashed_password = get_hash(password, salt)
+            
+            if hashed_password == user[0]:
+                flg = True  
+    except psycopg2.DatabaseError as db_error:
+        flg = False  
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+    
+    return flg
+
+        
+        
