@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica', sans-serif;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #49b5b5;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+nav a {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:first-child {
+  color: orange;
+}
+
+.container {
+  display: flex;
+  padding: 30px;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 1;
+  padding-left: 40px;
+}
+
+#date {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 曜日表示 */
+.days-row {
+  display: flex;
+  margin-left: 30px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: center;
+  gap: 10px;
+}
+
+.day {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* 各曜日ごとの調整 */
+.mon { margin-left: 35px; }
+.tue { margin-left: 2px; }
+.wed { margin-left: 4px; }
+.thu { margin-left: 2px; }
+.fri { margin-right: 10px; }
+
+.days-row div {
+  display: table-cell;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.timetable-wrapper {
+  display: flex;
+  align-items: start;
+}
+
+/* 時間列 */
+.time-column {
+  width: 60px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-weight: bold;
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+/* 各時間の調整 */
+.time-column div {
+  text-align: right;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+/* 各時間の調整 */
+.time-column .first-time {
+  margin-top: 0px;
+}
+
+.time-column .second-time {
+  margin-top: 60px;
+}
+
+.time-column .third-time {
+  margin-top: 65px;
+}
+
+.time-column .fourth-time {
+  margin-top: 65px;
+}
+
+/* 表 */
+.timetable {
+  border-collapse: collapse;
+  background-color: white;
+  width: 100%;
+}
+
+.timetable td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 10px;
+  min-width: 100px;
+  height: 100px;
+}
+
+/* ToDo */
+.todo-box {
+  border: 2px solid #333;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  height: 300px;
+  overflow-y: scroll; /* 縦方向にスクロールを追加 */
+}
+
+
+.todo-box input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* 出席 */
+.attendance-box {
+  padding: 20px;
+  border-radius: 10px;
+  height: 100px;
+}
+
+.attendance-box h3 {
+  border-bottom: 3px solid #69c8c8;
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.attendance-box p {
+  margin: 5px 0;
+  font-size: 20px;
+}
