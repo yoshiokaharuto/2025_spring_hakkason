@@ -92,6 +92,8 @@
             schedule: [ 19 ] } 
             ]; 
     document.querySelectorAll(".subject-check").forEach(checkbox => {checkbox.addEventListener("change", () => const subject = subjectList.find(s => s.id === checkbox.value);
+        subject.schedule.forEach(time => {const cellId = `cell-${time}`});
+        const ul = document.getElementById(cellId);
     )})
   </script>
 </body>
