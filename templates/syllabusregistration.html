@@ -94,6 +94,12 @@
     document.querySelectorAll(".subject-check").forEach(checkbox => {checkbox.addEventListener("change", () => const subject = subjectList.find(s => s.id === checkbox.value);
         subject.schedule.forEach(time => {const cellId = `cell-${time}`});
         const ul = document.getElementById(cellId);
+        if(checkbox.checked) {
+          const li = documnent.createElement('li');
+          li.textContent = subject.name;
+          li.setAttribute("data-subject-id",subject.id);
+          ul.appendChild(li);
+        }
     )})
   </script>
 </body>
