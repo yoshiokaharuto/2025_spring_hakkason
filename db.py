@@ -101,3 +101,26 @@ def get_subjects():
     result = cursor.fetchall()
     
     return result
+
+def register_subject(user_id,subject_id):
+    sql = "INSERT INTO timetable (user_id,subject_id) VALUES (%s,%s);"
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql,(user_id,subject_id))
+        
+        connection.commit()
+        count = cursor.rowcount
+    
+    except psycopg2.DatabaseError as e:
+        
+        count = 0
+        
+    finally:
+        connection.close()
+        cursor.close()
+    
+    return count
+        
