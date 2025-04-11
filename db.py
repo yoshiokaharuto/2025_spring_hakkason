@@ -12,10 +12,6 @@ def get_hash(password, salt):
     hashed_password = hashlib.pbkdf2_hmac("sha256", b_pw, b_salt, 1000).hex()
     return hashed_password
 
-def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
 
 import os, psycopg2, string, random, hashlib
 
@@ -89,5 +85,25 @@ def login(email, password):
     
     return flg
 
-        
-        
+
+def syllabus():
+    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql)
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []
+
+def search(semester_name, subject_name):
+    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id WHERE regulation_subject.name LIKE %s AND subject.name LIKE %s'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, ('%' + semester_name + '%', '%' + subject_name + '%'))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []
