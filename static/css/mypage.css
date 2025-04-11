@@ -88,17 +88,25 @@
   margin: 0;
 }
 
-/* リストの部分 */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* コンテナ全体を画面幅いっぱいに */
 .container {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
+  justify-content: space-between; /* 左右に分ける */
+  gap: 0; /* テーブル間の余白なしにしたいならここを0に */
+  width: 100vw; /* 画面いっぱいに広げる */
+  padding: 0; /* パディングもなし */
+  margin: 25px 0 0 0; /* マージンもなし */
 }
 
 table {
   border-collapse: collapse;
-  width: 1000px;
+  margin-top: 50;
+  width: 50vw;
 }
 
 th,
