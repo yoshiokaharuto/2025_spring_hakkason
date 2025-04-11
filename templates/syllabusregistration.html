@@ -20,10 +20,10 @@
     <a href="#" class="logout">ログアウト</a>
   </header>
 
-  <title1>
+  <div id="title"> 
     <h1>履修登録</h1>
     <span class="highlight">2025後期履修登録</span>
-  </title1>
+  </div>
 
   <div class="container">
     <div class="table-section">
@@ -74,22 +74,26 @@
         </tbody>
       </table>
 
-      <button class="submit-button">履修確定</button>
     </div>
     <div class="search-section">
-      <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
+     <form method="POST" action="{{ url_for('timetable.register_subject') }}">
       <div class="search-results">
-        {% for l in dict_list %}
-        <label><input type="checkbox" class="subject-check" value="{{l['id']}}">{{l['name']}}</label><br>
-        {% endfor %}
+       {% for l in dict_list %}
+        <label>
+          <input type="checkbox" name="subjects" class="subject-check" value="{{l['id']}}">{{l['name']}}<br>
+        </label>
+       {% endfor %}
       </div>
+
+  <button type="submit" class="submit-button">履修確定</button>
+</form>
+
     </div>
   </div>
 
       <script> 
             const subjectList = {{ dict_list | tojson }};
             
-            // チェックボックスの監視 
             document.querySelectorAll(".subject-check").forEach(checkbox => { checkbox.addEventListener("change", () => { const subject = subjectList.find(s => s.id == checkbox.value); 
                 subject.schedule.forEach(time => { const cellId = `cell-${time}`; 
                 const ul = document.getElementById(cellId); 
