@@ -79,30 +79,22 @@
     <div class="search-section">
       <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
       <div class="search-results">
-        <label><input type="checkbox" class="subject-check" value="1"> プログラミング（月曜1限）</label><br> 
-        <label><input type="checkbox" class="subject-check" value="2"> 英語（火曜2限）</label><br> 
-        <label><input type="checkbox" class="subject-check" value="3"> 数学（水曜1限）</label><br> 
+        {% for l in dict_list %}
+        <label><input type="checkbox" class="subject-check" value="{{l['id']}}">{{l['name']}}</label><br>
+        {% endfor %}
       </div>
     </div>
   </div>
 
       <script> 
-            // 科目一覧（複数の時間に対応） 
-            const subjectList = [ 
-            { id: "1", name: "プログラミング", 
-            schedule: [1,7,15]}, 
-            { id: "2", name: "英語", 
-            schedule: [ 6 ] }, 
-            { id: "3", name: "数学", 
-            schedule: [ 19 ] } 
-            ]; 
+            const subjectList = {{ dict_list | tojson }};
             
             // チェックボックスの監視 
-            document.querySelectorAll(".subject-check").forEach(checkbox => { checkbox.addEventListener("change", () => { const subject = subjectList.find(s => s.id === checkbox.value); 
+            document.querySelectorAll(".subject-check").forEach(checkbox => { checkbox.addEventListener("change", () => { const subject = subjectList.find(s => s.id == checkbox.value); 
                 subject.schedule.forEach(time => { const cellId = `cell-${time}`; 
                 const ul = document.getElementById(cellId); 
                 if (checkbox.checked) { 
-                    const li = document.createElement("li"); 
+                    const li = document.createElement("li");  
                     li.textContent = subject.name; 
                     li.setAttribute("data-subject-id", subject.id); 
                     ul.appendChild(li); 
