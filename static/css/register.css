@@ -38,20 +38,21 @@ input, select {
     cursor: pointer;
     margin: 0 auto;
     display: block;
+    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* セル間の隙間をなくす */
+    border-collapse: collapse;
 }
 
 td {
-    padding: 10px; /* 要素間の余白を1pxに調整 */
+    padding: 10px;
     vertical-align: top;
 }
 
 .short {
-    width: 45%; /* 学年と学科の幅を短く設定 */
+    width: 45%;
 }
 
 .long {
@@ -68,4 +69,12 @@ td {
 .flash {
     color: red;
     margin-bottom: 10px;
+}
+
+.return_button img {
+    background-color: transparent;
+    display: block;
+}
+.return_button {
+    background-color: transparent;
 }
