@@ -20,10 +20,10 @@
     <a href="#" class="logout">ログアウト</a>
   </header>
 
-  <title1>
+  <div id="title"> 
     <h1>履修登録</h1>
     <span class="highlight">2025後期履修登録</span>
-  </title1>
+  </div>
 
   <div class="container">
     <div class="table-section">
@@ -42,72 +42,75 @@
           <tr>
             <th>1限</th>
             <td><ul id="cell-1"></ul></td>
-            <td><ul id="cell-2"></ul></td>
-            <td><ul id="cell-3"></ul></td>
-            <td><ul id="cell-4"></ul></td>
             <td><ul id="cell-5"></ul></td>
+            <td><ul id="cell-9"></ul></td>
+            <td><ul id="cell-13"></ul></td>
+            <td><ul id="cell-17"></ul></td>
           </tr>
           <tr>
             <th>2限</th>
+            <td><ul id="cell-2"></ul></td>
             <td><ul id="cell-6"></ul></td>
-            <td><ul id="cell-7"></ul></td>
-            <td><ul id="cell-8"></ul></td>
-            <td><ul id="cell-9"></ul></td>
             <td><ul id="cell-10"></ul></td>
+            <td><ul id="cell-14"></ul></td>
+            <td><ul id="cell-18"></ul></td>
           </tr>
           <tr>
             <th>3限</th>
+            <td><ul id="cell-3"></ul></td>
+            <td><ul id="cell-7"></ul></td>
             <td><ul id="cell-11"></ul></td>
-            <td><ul id="cell-12"></ul></td>
-            <td><ul id="cell-13"></ul></td>
-            <td><ul id="cell-14"></ul></td>
             <td><ul id="cell-15"></ul></td>
+            <td><ul id="cell-19"></ul></td>
           </tr>
           <tr>
             <th>4限</th>
+            <td><ul id="cell-4"></ul></td>
+            <td><ul id="cell-8"></ul></td>
+            <td><ul id="cell-12"></ul></td>
             <td><ul id="cell-16"></ul></td>
-            <td><ul id="cell-17"></ul></td>
-            <td><ul id="cell-18"></ul></td>
-            <td><ul id="cell-19"></ul></td>
             <td><ul id="cell-20"></ul></td>
           </tr>
         </tbody>
       </table>
 
-      <button class="submit-button">履修確定</button>
     </div>
     <div class="search-section">
-  <input type="text" id="searchInput" class="search-input" placeholder="科目検索">
-</div>
-<div class="search-results">
-       <p></p>
+     <form method="POST" action="{{ url_for('timetable.register_subject') }}">
+      <div class="search-results">
+       {% for l in dict_list %}
+        <label>
+          <input type="checkbox" name="subjects" class="subject-check" value="{{l['id']}}">{{l['name']}}<br>
+        </label>
+       {% endfor %}
       </div>
+
+  <button type="submit" class="submit-button">履修確定</button>
+</form>
+
+    </div>
   </div>
 
-  <script>
-     const subjectList = [ 
-            { id: "1", name: "プログラミング", 
-            schedule: [1,7,15]}, 
-            { id: "2", name: "英語", 
-            schedule: [ 6 ] }, 
-            { id: "3", name: "数学", 
-            schedule: [ 19 ] } 
-            ]; 
-    document.querySelectorAll(".subject-check").forEach(checkbox => {checkbox.addEventListener("change", () => const subject = subjectList.find(s => s.id === checkbox.value);
-        subject.schedule.forEach(time => {const cellId = `cell-${time}`});
-        const ul = document.getElementById(cellId);
-        if(checkbox.checked) {
-          const li = documnent.createElement('li');
-          li.textContent = subject.name;
-          li.setAttribute("data-subject-id",subject.id);
-          ul.appendChild(li);
-        } else {
-          const liToRemove = ul.querySelector(`li[data-subject-id="${subject.id}"]`);
-          if (liToRemove) {
-            ul.removeChild(liToRemove);
-          }
-        }
-    )})
-  </script>
+      <script> 
+            const subjectList = {{ dict_list | tojson }};
+            
+            document.querySelectorAll(".subject-check").forEach(checkbox => { checkbox.addEventListener("change", () => { const subject = subjectList.find(s => s.id == checkbox.value); 
+                subject.schedule.forEach(time => { const cellId = `cell-${time}`; 
+                const ul = document.getElementById(cellId); 
+                if (checkbox.checked) { 
+                    const li = document.createElement("li");  
+                    li.textContent = subject.name; 
+                    li.setAttribute("data-subject-id", subject.id); 
+                    ul.appendChild(li); 
+                } else { 
+                    const liToRemove = ul.querySelector(`li[data-subject-id="${subject.id}"]`); 
+                    if (liToRemove) { 
+                        ul.removeChild(liToRemove); 
+                    } 
+                } 
+            }); 
+        }); 
+    }); 
+    </script>
 </body>
 </html>
