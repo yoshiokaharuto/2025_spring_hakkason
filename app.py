@@ -57,24 +57,24 @@ def register_complete():
 
 
 
-@app.route('/', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
     
-    print('ログイン始まる')
     
     if db.login(email, password):
-        print('ログイン処理入った')
+        
+        account = db.select_user(email)
         session['user'] = True
+        session['user_id'] = account[0]
         session.permanent = True
-        app.permanent_session_lifetime = timedelta(minutes=5)
-        return redirect(url_for('mypage'))
+        app.permanent_session_lifetime = timedelta(minutes=30)
+        return redirect(url_for('main'))
     else :
         error = 'メールアドレスまたはパスワードが違います。'
-        
-        input_data = {'email':email, 'password':password}
-        return render_template('mypage.html', error=error, data=input_data)
+
+        return render_template('login.html', error=error)
     
 @app.route('/main', methods=['GET'])
 def main():
