@@ -89,5 +89,15 @@ def login(email, password):
     
     return flg
 
-        
-        
+
+def get_subjects():
+    sql = "SELECT s.subject_id, s.name AS subject_name, t.name AS teacher_name, array_agg(sd.position ORDER BY sd.position) AS subject_positions FROM subject s JOIN subject_days sd ON s.subject_id = sd.subject_id LEFT JOIN teachers t ON s.teacher_id = t.teacher_id GROUP BY s.subject_id, s.name, t.name ORDER BY s.subject_id;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql,)
+    
+    result = cursor.fetchall()
+    
+    return result
