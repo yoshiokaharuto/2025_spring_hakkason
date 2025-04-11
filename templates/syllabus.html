@@ -28,7 +28,7 @@
     <div class="container">
         <h1>シラバス一覧</h1>
 
-        <form method="get" action="/syllabus_list" class="search-box">
+        <form method="get" action="/serch" class="search-box">
             <label>学則科目名：</label>
             <input type="text" name="semester_name" value="{{ request.args.get('semester_name', '') }}">
             <label>科目名：</label>
@@ -42,27 +42,28 @@
                     <th>学則科目名</th>
                     <th>科目名</th>
                     <th>単位時間数</th>
-                    <th>開講年度</th>
                     <th>開講予定期</th>
                     <th>推奨学年</th>
                 </tr>
             </thead>
             <tbody>
-                {% for subject in subjects %}
-                <tr>
-                    <td>{{ subject[0] }}</td>
-                    <td>{{ subject[1] }}</td>
-                    <td>{{ subject[2] }}</td>
-                    <td>{{ subject[3] }}</td>
-                    <td>{{ subject[4] }}</td>
-                    <td>{{ subject[5] }}</td>
-                </tr>
-
+                {% if subjects %}
+                    {% for subject in subjects %}
+                    <tr>
+                        <td>{{ subject[0] }}</td>
+                        <td>{{ subject[1] }}</td>
+                        <td>{{ subject[2] }}</td>
+                        <td>{{ subject[3] }}</td>
+                        <td>{{ subject[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" id="no">該当する科目が見つかりませんでした。</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
-        {% else %}
-        <p colspan="6" id="no">該当する科目が見つかりませんでした。</p>
-        {% endfor %}
     </div>
 </body>
 
