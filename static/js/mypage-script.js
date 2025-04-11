@@ -1,9 +1,9 @@
 document.querySelectorAll(".score-box").forEach((box) => {
   const subject = box.dataset.subject;
-  const score = parseInt(box.dataset.score, 10); // 分子
-  const allScore = parseInt(box.dataset.allscore, 10); // 分母（追加）
+  const score = parseInt(box.dataset.score, 10);
+  const allScore = parseInt(box.dataset.allscore, 10);
 
-  const rate = (score / allScore) * 100; // 得点率（%）
+  const rate = (score / allScore) * 100;
 
   const radius = 85;
   const circumference = 2 * Math.PI * radius;
@@ -25,7 +25,6 @@ document.querySelectorAll(".score-box").forEach((box) => {
     </div>
   `;
 
-  // アニメーション処理（得点率に応じて描画）
   const line = box.querySelector("circle.line");
   setTimeout(() => {
     const newOffset = circumference - (circumference * rate) / 100;
