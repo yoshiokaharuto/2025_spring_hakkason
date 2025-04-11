@@ -13,24 +13,6 @@ def get_hash(password, salt):
     return hashed_password
 
 def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
-
-import os, psycopg2, string, random, hashlib
-
-def get_salt():
-    charset = string.ascii_letters + string.digits
-    salt = ''.join(random.choices(charset, k=30))
-    return salt
-
-def get_hash(password, salt):
-    b_pw = bytes(password, "utf-8")
-    b_salt = bytes(salt, "utf-8")
-    hashed_password = hashlib.pbkdf2_hmac("sha256", b_pw, b_salt, 1000).hex()
-    return hashed_password
-
-def get_connection():
     url = os.environ.get('DATABASE_URL')
     if url is None:
         raise ValueError("DATABASE_URL environment variable is not set.")
@@ -95,8 +77,6 @@ def select_user(email):
     result = cursor.fetchone()
     
     return result
-    
-    
 
 def get_subjects():
     sql = "SELECT s.subject_id, s.name AS subject_name, t.name AS teacher_name, array_agg(sd.position ORDER BY sd.position) AS subject_positions FROM subject s JOIN subject_days sd ON s.subject_id = sd.subject_id LEFT JOIN teachers t ON s.teacher_id = t.teacher_id GROUP BY s.subject_id, s.name, t.name ORDER BY s.subject_id;"
@@ -128,4 +108,25 @@ def register_subject(user_id,subject_id):
         cursor.close()
         connection.close()
     return result
-        
+
+def syllabus():
+    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql)
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []
+ 
+def search(semester_name, subject_name):
+    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id WHERE regulation_subject.name LIKE %s AND subject.name LIKE %s'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, ('%' + semester_name + '%', '%' + subject_name + '%'))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []

@@ -109,10 +109,7 @@ th {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #399f95;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
 .search-results {

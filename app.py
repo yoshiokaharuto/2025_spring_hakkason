@@ -64,22 +64,21 @@ def login():
     
     
     if db.login(email, password):
-        
         account = db.select_user(email)
         session['user'] = True
         session['user_id'] = account[0]
         session.permanent = True
         app.permanent_session_lifetime = timedelta(minutes=30)
+        
         return redirect(url_for('main'))
     else :
         error = 'メールアドレスまたはパスワードが違います。'
-
         return render_template('login.html', error=error)
     
 @app.route('/main', methods=['GET'])
 def main():
     if 'user' in session:
-        return render_template('mypage.html')
+        return render_template('main.html')
     else:
         return redirect(url_for('login'))
     
@@ -87,6 +86,20 @@ def main():
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+
+
+@app.route('/syllabus', methods=['GET'])
+def syllabus():
+    subjects = db.syllabus()
+    return render_template('syllabus.html', subjects=subjects)
+
+@app.route('/serch', methods=['GET'])
+def serch():
+    semester_name = request.args.get('semester_name', '')
+    subject_name = request.args.get('subject_name', '')
+    subjects = db.search(semester_name, subject_name)
+    return render_template('syllabus.html', subjects=subjects)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
