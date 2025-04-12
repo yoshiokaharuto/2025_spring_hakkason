@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import db, string, random
 from timetable import timetable_bp
+from mypage import mypage_bp
 from datetime import timedelta
 
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
 
 app.register_blueprint(timetable_bp)
+app.register_blueprint(mypage_bp)
 
 
 @app.route('/', methods = ['GET'])
