@@ -145,3 +145,18 @@ def get_account_data(account_id):
     connection.close()
     
     return result
+
+def subject_data(account_id):
+    sql="SELECT subject.name,subject.regulation_subject_id,regulation_subject.name,timetable.account_id FROM timetable JOIN subject ON timetable.subject_id = subject.subject_id JOIN regulation_subject ON subject.regulation_subject_id =regulation_subject.regulation_subject_id WHERE timetable.account_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result 
