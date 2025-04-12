@@ -130,3 +130,18 @@ def search(semester_name, subject_name):
     except Exception as e:
         print(f"エラー: {e}")
         return []
+    
+def get_account_data(account_id):
+    sql = "SELECT name,grade,department_id FROM accounts WHERE account_id = %s"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
