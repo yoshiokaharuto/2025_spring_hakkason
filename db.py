@@ -132,7 +132,7 @@ def search(semester_name, subject_name):
         return []
     
 def get_account_data(account_id):
-    sql = "SELECT name,grade,department_id FROM accounts WHERE account_id = %s"
+    sql = "SELECT accounts.name,accounts.grade,departments.name FROM accounts JOIN departments ON accounts.department_id = departments.department_id WHERE accounts.account_id =%s;"
     
     connection = get_connection()
     cursor = connection.cursor()
@@ -147,7 +147,7 @@ def get_account_data(account_id):
     return result
 
 def subject_data(account_id):
-    sql="SELECT subject.name,subject.regulation_subject_id,regulation_subject.name,timetable.account_id FROM timetable JOIN subject ON timetable.subject_id = subject.subject_id JOIN regulation_subject ON subject.regulation_subject_id =regulation_subject.regulation_subject_id WHERE timetable.account_id = %s;"
+    sql="SELECT s.name AS subject_name, s.credit, COUNT(a.attendance_id) AS absent_count FROM subject s JOIN timetable t ON s.subject_id = t.subject_id LEFT JOIN attendances a ON t.timetable_id = a.timetable_id WHERE t.account_id = %s GROUP BY s.subject_id, s.name, s.credit;"
     
     connection = get_connection()
     cursor = connection.cursor()
