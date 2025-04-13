@@ -21,13 +21,13 @@
         <a href="{{url_for('timetable.course_register')}}">時間割登録</a>
         <a href="#">TODOリスト登録</a>
     </div>
-    <a href="{{url_for('login')}}" class="logout">ログアウト</a>
+    <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
 </header>
 
 
 <body>
     <div class="parent1">
-        <div class="parentleft">高度情報工学科 2学年 坂上田村麻呂</div>
+        <div class="parentleft">{{account_data[2]}} {{account_data[1]}}年 {{account_data[0]}}</div>
         <div class="parentright">２学年前期</div>
     </div>
 
@@ -58,6 +58,10 @@
     </div>
 
 
+    <script>
+        const dictSubject = {{ dict_subject| tojson }};
+        console.log("dictSubject:", dictSubject);
+    </script>
     <script src="../static/js/mypage-script.js"></script>
     <script src="../static/js/mypagelist-script.js"></script>
 </body>
