@@ -110,7 +110,7 @@ def register_subject(user_id,subject_id):
     return result
 
 def syllabus():
-    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
+    sql = 'SELECT subject.subject_id,regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
@@ -261,3 +261,17 @@ def delete_todo_by_id(todo_id, account_id):
     except Exception as e:
         print(f"TODO削除エラー: {e}")
 
+def syllabus_detail(id):
+    sql = "SELECT subject_id,subject.name,regulation_subject.name,credit,semester,recommended_grade,teachers.name FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id JOIN teachers ON subject.teacher_id = teachers.teacher_id where subject_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
