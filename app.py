@@ -12,7 +12,7 @@ app.register_blueprint(timetable_bp)
 app.register_blueprint(mypage_bp)
 
 
-@app.route('/', methods = ['GET'])
+@app.route('/')
 def index():
     return render_template('login.html')
 
@@ -89,7 +89,7 @@ def main():
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 
@@ -105,7 +105,7 @@ def serch():
     subjects = db.search(semester_name, subject_name)
     return render_template('syllabus.html', subjects=subjects)
 
-@app.route('/')
+@app.route('/review_form')
 def review_form():
     return render_template('review.html')
 
@@ -121,13 +121,11 @@ def create_review():
     count = db.review(content, difficulty, assignment, interest, speed, other)
 
     if count == 1:
-        session.clear() 
-        return render_template('main.html')
+        return redirect(url_for('main'))
     else:
         return render_template('review.html')
 
-
-
+@app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -145,6 +143,7 @@ def todo():
             return render_template('todo_register.html', error=error_message)
     else:
         return render_template('todo_register.html')
+    
 @app.route('/complete_todo', methods=['POST'])
 def complete_todo():
     if 'user_id' not in session:
