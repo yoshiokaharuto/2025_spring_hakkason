@@ -50,11 +50,11 @@
                 {% if subjects %}
                     {% for subject in subjects %}
                     <tr>
-                        <td>{{ subject[0] }}</td>
                         <td>{{ subject[1] }}</td>
-                        <td>{{ subject[2] }}</td>
+                        <td><a href="{{url_for('syllabus.syllabus_detail')}}?id={{subject[0]}}" name="id" class="list">{{ subject[2] }}</td>
                         <td>{{ subject[3] }}</td>
                         <td>{{ subject[4] }}</td>
+                        <td>{{ subject[5] }}</td>
                     </tr>
                     {% endfor %}
                 {% else %}
