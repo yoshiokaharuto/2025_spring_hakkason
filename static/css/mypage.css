@@ -99,13 +99,13 @@ body {
   justify-content: space-between; /* 左右に分ける */
   gap: 0; /* テーブル間の余白なしにしたいならここを0に */
   width: 100vw; /* 画面いっぱいに広げる */
-  padding: 0; /* パディングもなし */
-  margin: 25px 0 0 0; /* マージンもなし */
+  padding: 0;
+  margin: 25px 0 0 0;
 }
 
 table {
   border-collapse: collapse;
-  margin-top: 50;
+  margin-top: 50px;
   width: 50vw;
 }
 

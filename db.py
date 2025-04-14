@@ -130,6 +130,7 @@ def search(semester_name, subject_name):
     except Exception as e:
         print(f"エラー: {e}")
         return []
+
       
 def review(content, difficulty, assignment, interest, speed, other):
     sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
@@ -208,6 +209,7 @@ def my_credit_data(account_id):
     
     return result
 
+
 def absence(date):
     sql = 'INSERT INTO attendances (absent_date) VALUES (%s)'
     count = 0  
@@ -225,4 +227,57 @@ def absence(date):
         if connection:
             connection.close()
         return count
+
+    
+def insert_todo(deadline, todo_text, account_id):
+    sql = 'INSERT INTO todos (deadline, content, account_id) VALUES (%s, %s, %s)'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (deadline, todo_text, account_id))
+            connection.commit()
+    except Exception as e:
+        print(f"エラー: {e}")
+
+
+def get_todos(account_id):
+    sql = 'SELECT todo_id, deadline, content FROM todos WHERE account_id = %s ORDER BY deadline ASC'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (account_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []
+
+    
+def get_user_id(email):
+    sql = 'SELECT account_id FROM accounts WHERE email = %s'
+
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (email,))
+            result = cursor.fetchone()
+            print(f"ユーザーID取得結果: {result}")  
+            if result:
+                return result[0]
+            else:
+                return None
+    except Exception as e:
+        print(f"ユーザーID取得エラー: {e}")
+        return None
+
+
+def delete_todo_by_id(todo_id, account_id):
+    sql = 'DELETE FROM todos WHERE todo_id = %s AND account_id = %s'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (todo_id, account_id))
+            connection.commit()
+    except Exception as e:
+        print(f"TODO削除エラー: {e}")
+
 

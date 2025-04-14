@@ -1,69 +1,106 @@
-.container {
+/* absence.css */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column; /* 縦方向のフレックスに変更 */
 }
 
-/* メインコンテンツ */
-.main {
-  flex: 1;
+.content-container {
+  display: flex; /* メインコンテンツとサイドバー用のフレックスコンテナ */
+  flex: 1; /* ヘッダー以外の残りスペースを埋める */
+}
+
+.main-content {
+  width: 80%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-h1 {
-  margin-top: 80px;
-  margin-bottom: 100px;
-}
-
-.form-area {
-  text-align: center;
-}
-
-.form-area p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
-}
-
-.form-area label {
-  margin-right: 10px;
-  font-size: 1.1em;
-}
-
-input[type="date"] {
-  padding: 5px;
-  font-size: 1em;
-}
-
-.submit-btn {
-  margin-top: 70px;
-  width: 80px;
-  height: 40px;
-  background-color: #48a6a7;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 24px;
+  justify-content: flex-start;
+  background-color: #f5f5f5;
 }
 
 .sidebar {
-  width: 250px;
-  background-color: #f1f3f2;
+  width: 20%;
+  background-color: #ffffff;
   padding: 20px;
-  box-sizing: border-box;
+  border-left: 1px solid #e0e0e0;
 }
 
-.sidebar h2 {
-  font-size: 1.2em;
+h1 {
+  font-size: 24px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  width: 150px;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* カレンダー入力用のスタイル */
+.date-picker {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  padding: 5px;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+}
+
+.date-picker::-webkit-calendar-picker-indicator:hover {
+  background-color: #e0e0e0;
+}
+
+.submit-btn {
+  background-color: #5bb7b7;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.past-absences {
+  margin-top: 20px;
+}
+
+.past-absences h2 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding-left: 10px;
+.past-absences ul {
+  padding-left: 20px;
 }
 
-.sidebar li {
-  margin-bottom: 10px;
+.past-absences li {
+  margin-bottom: 5px;
 }

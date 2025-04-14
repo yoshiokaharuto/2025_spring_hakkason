@@ -12,7 +12,7 @@ app.register_blueprint(timetable_bp)
 app.register_blueprint(mypage_bp)
 
 
-@app.route('/', methods = ['GET'])
+@app.route('/')
 def index():
     return render_template('login.html')
 
@@ -80,14 +80,17 @@ def login():
 @app.route('/main', methods=['GET'])
 def main():
     if 'user' in session:
-        return render_template('main.html')
+        todos = db.get_todos(session['user_id'])
+        return render_template('main.html', todos=todos)
     else:
         return redirect(url_for('login'))
+
     
-@app.route('/logout')
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
-    session.pop('user', None)
+    session.clear()
     return redirect(url_for('index'))
+
 
 
 @app.route('/syllabus', methods=['GET'])
@@ -102,7 +105,7 @@ def serch():
     subjects = db.search(semester_name, subject_name)
     return render_template('syllabus.html', subjects=subjects)
 
-@app.route('/')
+@app.route('/review_form')
 def review_form():
     return render_template('review.html')
 
@@ -118,10 +121,10 @@ def create_review():
     count = db.review(content, difficulty, assignment, interest, speed, other)
 
     if count == 1:
-        session.clear() 
-        return render_template('main.html')
+        return redirect(url_for('main'))
     else:
         return render_template('review.html')
+
 
 @app.route('/')
 def absence_form():
@@ -146,5 +149,43 @@ def Absence_registration():
     else:
         return render_template('absenceconfirm.html')
 
+@app.route('/todo', methods=['GET', 'POST'])
+def todo():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        deadline = request.form.get('deadline')
+        todo_text = request.form.get('todo')
+        account_id = session['user_id']
+
+        if deadline and todo_text:
+            db.insert_todo(deadline, todo_text, account_id)
+            return redirect(url_for('main'))
+        else:
+            error_message = "期限とTODO内容の両方を入力してください。"
+            return render_template('todo_register.html', error=error_message)
+    else:
+        return render_template('todo_register.html')
+    
+@app.route('/complete_todo', methods=['POST'])
+def complete_todo():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    todo_ids = request.form.getlist('todo_id')  
+
+    if todo_ids:
+        for todo_id in todo_ids:
+            db.delete_todo_by_id(todo_id, session['user_id'])  
+        return redirect(url_for('main'))
+    else:
+        error_message = "削除するTODOを選択してください。"
+        todos = db.get_todos(session['user_id'])
+        return render_template('main.html', error=error_message, todos=todos)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
