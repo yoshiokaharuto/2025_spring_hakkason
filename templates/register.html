@@ -19,18 +19,18 @@
                 <tr>
                     <td>
                         <select name="year" class="short" required>
-                            <option value="">学年</option>
-                            <option value="1">1学年</option>
+                            <option value="" disabled selected hidden>学年</option>
+                            <option value="1">１学年</option>
                             <option value="2">２学年</option>
                             <option value="3">３学年</option>
                             <option value="4">４学年</option>
                         </select>
-                    </td>
+                    </td>                    
                 </tr>
                 <tr>
                     <td>
                         <select name="department" class="short" required>
-                            <option value="">学科</option>
+                            <option value="" disabled selected hidden>学科</option>
                             <option value="1">情報システム科</option>
                             <option value="2">総合システム工学科</option>
                             <option value="3">高度情報工学科</option>
@@ -61,5 +61,7 @@
             <button type="submit" class="submit-button">作成</button>
         </form>
     </div>
+
+    <script src="../static/js/register.js"></script>
 </body>
 </html>

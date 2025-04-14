@@ -1,33 +1,18 @@
-// 出席データ
-const data = [
-  { subject: "システム設計論1", koma: 160, absent: 0 },
-  { subject: "システム設計論2", koma: 160, absent: 1 },
-  { subject: "システム設計論3", koma: 160, absent: 1 },
-  { subject: "システム設計論4", koma: 160, absent: 2 },
-  { subject: "システム設計論5", koma: 160, absent: 0 },
-  { subject: "システム設計論6", koma: 160, absent: 1 },
-  { subject: "システム設計論7", koma: 160, absent: 0 },
-  { subject: "システム設計論8", koma: 160, absent: 2 },
-  { subject: "システム設計論9", koma: 160, absent: 0 },
-  { subject: "システム設計論7", koma: 160, absent: 0 },
-  { subject: "システム設計論8", koma: 160, absent: 2 },
-  { subject: "システム設計論9", koma: 160, absent: 0 },
-];
-
 const leftTable = document.getElementById("leftTable");
 const rightTable = document.getElementById("rightTable");
 
 // データを交互に分ける
-data.forEach((item, index) => {
+dictSubject.forEach((item, index) => {
+  const koma = item.credit / 2;
+  const name = item.subject_name;
+  const attendance = item.attendance;
+  const attendanceRate = Math.round(((koma - attendance) / koma) * 100);
   const row = document.createElement("tr");
-  const attendanceRate = Math.round(
-    ((item.koma - item.absent) / item.koma) * 100
-  );
 
   row.innerHTML = `
-      <td>${item.subject}</td>
-      <td>${item.koma}コマ</td>
-      <td>${item.absent}コマ</td>
+      <td>${name}</td>
+      <td>${koma}コマ</td>
+      <td>${attendance}コマ</td>
       <td>${attendanceRate}%</td>
     `;
 

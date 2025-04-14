@@ -130,3 +130,134 @@ def search(semester_name, subject_name):
     except Exception as e:
         print(f"エラー: {e}")
         return []
+
+      
+def review(content, difficulty, assignment, interest, speed, other):
+    sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
+    count = 0  
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (content, difficulty, assignment, interest, speed, other))
+        connection.commit()
+        count = cursor.rowcount  
+    except psycopg2.DatabaseError as e:
+        print(f"Database error: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return count
+
+def get_account_data(account_id):
+    sql = "SELECT accounts.name,accounts.grade,departments.name FROM accounts JOIN departments ON accounts.department_id = departments.department_id WHERE accounts.account_id =%s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+
+def subject_data(account_id):
+    sql="SELECT s.name AS subject_name, s.credit, COUNT(a.attendance_id) AS absent_count FROM subject s JOIN timetable t ON s.subject_id = t.subject_id LEFT JOIN attendances a ON t.timetable_id = a.timetable_id WHERE t.account_id = %s GROUP BY s.subject_id, s.name, s.credit;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result 
+
+def credit_data(account_id):
+    sql = "SELECT rs.name,ru.required_units FROM accounts a JOIN required_units ru ON a.grade = ru.grade AND a.department_id = ru.department_id JOIN regulation_subject rs ON ru.subject_id = rs.regulation_subject_id WHERE a.account_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+
+def my_credit_data(account_id):
+    sql = "SELECT rs.name AS regulation_subject_name, SUM(s.credit) AS total_credits FROM timetable t JOIN subject s ON t.subject_id = s.subject_id JOIN regulation_subject rs ON s.regulation_subject_id = rs.regulation_subject_id WHERE t.account_id = %s GROUP BY rs.name ORDER BY rs.name;"
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+
+    
+def insert_todo(deadline, todo_text, account_id):
+    sql = 'INSERT INTO todos (deadline, content, account_id) VALUES (%s, %s, %s)'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (deadline, todo_text, account_id))
+            connection.commit()
+    except Exception as e:
+        print(f"エラー: {e}")
+
+
+def get_todos(account_id):
+    sql = 'SELECT todo_id, deadline, content FROM todos WHERE account_id = %s ORDER BY deadline ASC'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (account_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"エラー: {e}")
+        return []
+
+    
+def get_user_id(email):
+    sql = 'SELECT account_id FROM accounts WHERE email = %s'
+
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (email,))
+            result = cursor.fetchone()
+            print(f"ユーザーID取得結果: {result}")  
+            if result:
+                return result[0]
+            else:
+                return None
+    except Exception as e:
+        print(f"ユーザーID取得エラー: {e}")
+        return None
+
+
+def delete_todo_by_id(todo_id, account_id):
+    sql = 'DELETE FROM todos WHERE todo_id = %s AND account_id = %s'
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(sql, (todo_id, account_id))
+            connection.commit()
+    except Exception as e:
+        print(f"TODO削除エラー: {e}")
+

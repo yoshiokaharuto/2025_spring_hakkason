@@ -1,0 +1,7 @@
+p, .submit-button {
+    border: none;
+}
+
+.submit-button {
+    outline: none;
+}
