@@ -175,3 +175,17 @@ def credit_data(account_id):
     connection.close()
     
     return result
+
+def my_credit_data(account_id):
+    sql = "SELECT rs.name AS regulation_subject_name, SUM(s.credit) AS total_credits FROM timetable t JOIN subject s ON t.subject_id = s.subject_id JOIN regulation_subject rs ON s.regulation_subject_id = rs.regulation_subject_id WHERE t.account_id = %s GROUP BY rs.name ORDER BY rs.name;"
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
