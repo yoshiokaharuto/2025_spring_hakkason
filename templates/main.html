@@ -16,7 +16,7 @@
     <a href="{{url_for('mypage.mypage')}}">マイページ</a>
     <a href="{{url_for('syllabus')}}">シラバス一覧</a>
     <a href="#">シラバス登録</a>
-    <a href="#">TODOリスト登録</a>
+    <a href="{{url_for('todo')}}">TODOリスト登録</a>
   </div>
   <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
 </header>
@@ -64,7 +64,23 @@
 
   <div class="right">
     <div class="todo-box" id="todo-list">
-      <P>こんにちは、あなたの健康を守ります。</p>
+      <h3>TODOリスト</h3>
+      {% if todos %}
+        <form action="{{ url_for('complete_todo') }}" method="POST">
+          <ul>
+            {% for todo in todos %}
+              <li>
+                <input type="checkbox" name="todo_id" value="{{ todo[0] }}">
+                {{ todo[2] }}（期限：{{ todo[1] }}）
+
+              </li>
+            {% endfor %}
+          </ul>
+          <button type="submit">選択したTODOを削除</button>
+        </form>
+      {% else %}
+        <p>現在、登録されているTODOはありません。</p>
+      {% endif %}
     </div>
 
     <div class="attendance-box" id="attendance-status">
