@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="../static/css/allstyle.css">
     <link rel="stylesheet" href="../static/css/header.css">
     <link rel="stylesheet" href="../static/css/absence.css">
-
 </head>
-
-
 
 <body>
     <header>
@@ -26,27 +23,33 @@
         </div>
         <a href="{{url_for('login')}}" class="logout">ログアウト</a>
     </header>
-    <div class="container">
-        <!-- メインエリア -->
-        <div class="main">
+
+    <div class="content-container">
+        <div class="main-content">
             <h1>欠席登録</h1>
-            <div class="form-area">
-                <p><strong>科目名：</strong>Java応用(Spring_boot)①</p>
-                <label for="date"><strong>欠席日：</strong></label>
-                <input type="date" id="date" name="date">
-                <br>
-                <button class="submit-btn">登録</button>
+
+            <div class="form-group">
+                <label>科目名：</label>
+                <div>Java応用(Spring_boot)</div>
             </div>
+
+            <div class="form-group">
+                <label>欠席日：</label>
+                <input type="date" class="date-picker" required>
+            </div>
+
+            <button class="submit-btn">登録</button>
         </div>
 
-        <!-- サイドバー -->
         <div class="sidebar">
-            <h2>過去の欠席</h2>
-            <ul>
-                <li>・2025/04/02(火)</li>
-                <li>・2025/04/02(火)</li>
-                <li>・2025/04/02(火)</li>
-            </ul>
+            <div class="past-absences">
+                <h2>過去の欠席</h2>
+                <ul>
+                    <li>2025/04/02(火)</li>
+                    <li>2025/04/02(火)</li>
+                    <li>2025/04/02(火)</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
