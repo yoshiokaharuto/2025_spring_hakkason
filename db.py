@@ -207,3 +207,22 @@ def my_credit_data(account_id):
     connection.close()
     
     return result
+
+def absence(date):
+    sql = 'INSERT INTO attendances (absent_date) VALUES (%s)'
+    count = 0  
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (date,))
+        connection.commit()
+        count = cursor.rowcount  
+    except psycopg2.DatabaseError as e:
+        print(f"Database error: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return count
+
