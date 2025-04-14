@@ -80,14 +80,17 @@ def login():
 @app.route('/main', methods=['GET'])
 def main():
     if 'user' in session:
-        return render_template('main.html')
+        todos = db.get_todos(session['user_id'])
+        return render_template('main.html', todos=todos)
     else:
         return redirect(url_for('login'))
+
     
-@app.route('/logout')
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
-    session.pop('user', None)
-    return redirect(url_for('index'))
+    session.clear()
+    return redirect(url_for('login'))
+
 
 
 @app.route('/syllabus', methods=['GET'])
@@ -124,5 +127,41 @@ def create_review():
         return render_template('review.html')
 
 
+
+def todo():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        deadline = request.form.get('deadline')
+        todo_text = request.form.get('todo')
+        account_id = session['user_id']
+
+        if deadline and todo_text:
+            db.insert_todo(deadline, todo_text, account_id)
+            return redirect(url_for('main'))
+        else:
+            error_message = "期限とTODO内容の両方を入力してください。"
+            return render_template('todo_register.html', error=error_message)
+    else:
+        return render_template('todo_register.html')
+@app.route('/complete_todo', methods=['POST'])
+def complete_todo():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    todo_ids = request.form.getlist('todo_id')  
+
+    if todo_ids:
+        for todo_id in todo_ids:
+            db.delete_todo_by_id(todo_id, session['user_id'])  
+        return redirect(url_for('main'))
+    else:
+        error_message = "削除するTODOを選択してください。"
+        todos = db.get_todos(session['user_id'])
+        return render_template('main.html', error=error_message, todos=todos)
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
