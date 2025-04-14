@@ -160,3 +160,18 @@ def subject_data(account_id):
     connection.close()
     
     return result 
+
+def credit_data(account_id):
+    sql = "SELECT rs.name,ru.required_units FROM accounts a JOIN required_units ru ON a.grade = ru.grade AND a.department_id = ru.department_id JOIN regulation_subject rs ON ru.subject_id = rs.regulation_subject_id WHERE a.account_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (account_id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
