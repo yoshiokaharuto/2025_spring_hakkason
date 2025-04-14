@@ -3,6 +3,10 @@ import db,json
 
 syllabus_bp = Blueprint('syllabus',__name__)
 
-@syllabus_bp.route('/syllabus_detail')
-def syllabus_detial():
-    return render_template('sllabusconfirm.html')
+@syllabus_bp.route('/syllabus_detail',methods=['GET'])
+def syllabus_detail():
+    
+    id = request.args.get('id')
+    detail_data = db.syllabus_detail(id)
+    
+    return render_template('sllabusconfirm.html',detail_data=detail_data)
