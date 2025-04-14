@@ -31,10 +31,10 @@
     </div>
 
     <div class="score-chart-wrap">
-        <div class="score-box" data-subject="情報システム設計論" data-score="90" data-allscore="100"></div>
-        <div class="score-box" data-subject="システム開発演習" data-score="75" data-allscore="80"></div>
-        <div class="score-box" data-subject="システム開発実践" data-score="60" data-allscore="70"></div>
-        <div class="score-box" data-subject="キャリデザイン" data-score="85" data-allscore="200"></div>
+        <div class="score-box" data-subject="情報システム設計論" data-score="{{my_data[0]}}" data-allscore="{{credit_data[0]}}"></div>
+        <div class="score-box" data-subject="システム開発演習" data-score="{{my_data[1]}}" data-allscore="{{credit_data[1]}}"></div>
+        <div class="score-box" data-subject="システム開発実践" data-score="{{my_data[2]}}" data-allscore="{{credit_data[2]}}"></div>
+        <div class="score-box" data-subject="キャリア<br>デザイン" data-score="{{my_data[3]}}" data-allscore="{{credit_data[3]}}"></div>
     </div>
     <div class="container">
         <table id="leftTable">
@@ -59,7 +59,6 @@
 
     <script>
         const dictSubject = {{ dict_subject| tojson }};
-        console.log("dictSubject:", dictSubject);
     </script>
     <script src="../static/js/mypage-script.js"></script>
     <script src="../static/js/mypagelist-script.js"></script>
