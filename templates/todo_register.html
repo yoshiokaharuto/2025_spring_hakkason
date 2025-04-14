@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/allstyle.css">
     <link rel="stylesheet" href="../static/css/header.css">
-    <link rel="stylesheet" href="../static/css/todo.css">
+    <link rel="stylesheet" href="../static/css/todo_register.css">
 </head>
 <body>
 
@@ -41,5 +41,13 @@
             </div>
         </form>
     </div>
+
+    <script>
+        const deadlineInput = document.getElementById('deadline');
+    
+        deadlineInput.addEventListener('click', () => {
+            deadlineInput.showPicker && deadlineInput.showPicker();
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>時間割画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../static/css/allstyle.css">
+    <link rel="stylesheet" href="../static/css/sllabusconfirm.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/header.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"></div>
+        <div class="nav-links">
+            <a href="./html/mypage.html">マイページ</a>
+            <a href="#">シラバス一覧</a>
+            <a href="#">シラバス登録</a>
+            <a href="#">TODOリスト登録</a>
+        </div>
+        <a href="{{url_for('login')}}" class="logout">ログアウト</a>
+    </header>
+
+    <h1>システム開発演習</h1>
+    <div class="container">
+        <!-- 左側：シラバス詳細 -->
+        <div class="left">
+            <h1>シラバス詳細</h1>
+            <table>
+                <tr>
+                    <th>シラバスID</th>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <th>学科科目名</th>
+                    <td>システム開発演習</td>
+                </tr>
+                <tr>
+                    <th>科目名</th>
+                    <td>Scratch基礎</td>
+                </tr>
+                <tr>
+                    <th>開講年度</th>
+                    <td>2025</td>
+                </tr>
+                <tr>
+                    <th>開講予定学期</th>
+                    <td>前期</td>
+                </tr>
+                <tr>
+                    <th>コマ数</th>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <th>推奨履修学年</th>
+                    <td>1年〜</td>
+                </tr>
+                <tr>
+                    <th>授業方法</th>
+                    <td>講義＆演習</td>
+                </tr>
+                <tr>
+                    <th>履修分類</th>
+                    <td>必修選択</td>
+                </tr>
+                <tr>
+                    <th>担当教員</th>
+                    <td>井上八雲</td>
+                </tr>
+                <tr>
+                    <th>実務経験</th>
+                    <td>なし</td>
+                </tr>
+                <tr>
+                    <th>実務内容</th>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>授業概要</th>
+                    <td>Scratchの基本操作を習得する</td>
+                </tr>
+                <tr>
+                    <th>到達目標</th>
+                    <td>Scratchの機能を習得し、簡単な作品を制作できること など</td>
+                </tr>
+                <tr>
+                    <th>成績評価基準</th>
+                    <td>小テスト(30%)、課題(40%)、受講態度(30%)</td>
+                </tr>
+                <tr>
+                    <th>授業外に必要な学習内容</th>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>教科書</th>
+                    <td>オリジナルテキスト</td>
+                </tr>
+                <tr>
+                    <th>教材費</th>
+                    <td>なし</td>
+                </tr>
+                <tr>
+                    <th>検定</th>
+                    <td>なし</td>
+                </tr>
+                <tr>
+                    <th>検定費</th>
+                    <td>なし</td>
+                </tr>
+                <tr>
+                    <th>履修にあたっての留意点</th>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>備考</th>
+                    <td>-</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 右側：前年度受講人数 -->
+        <div class="right">
+            <div class="section-title">前年度受講人数</div>
+            <div class="box">
+                <p>1年生：20人</p>
+                <p>2年生：20人</p>
+                <p>3年生：20人</p>
+                <p>4年生：20人</p>
+            </div>
+            <div class="section-title">レーダーチャート</div>
+            <canvas id="radarChart" width="100" height="100"></canvas>
+            <div class="section-title">授業レビュー</div>
+            <div class="review-box">
+                <ul>
+                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
+                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
+                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
+                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
+                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
+                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
+                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
+                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
+                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
+                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
+                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
+                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
+                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
+                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
+                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
+                    <!-- さらにレビューを追加してスクロールできるように -->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <script src="../static/js/sllabusconfirm.js"></script>
+</body>
+
+</html>

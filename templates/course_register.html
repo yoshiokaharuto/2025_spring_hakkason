@@ -1,11 +1,118 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>履修登録</title>
+  <meta charset="UTF-8">
+  <title>履修登録</title>
+  <link rel="stylesheet" href="../static/css/syllabusregistration.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/header.css">
 </head>
 <body>
-    <p>履修登録画面</p>
+
+  <header>
+    <div class="logo"></div>
+    <div class="nav-links">
+        <a href="./html/mypage.html">マイページ</a>
+        <a href="#">シラバス一覧</a>
+        <a href="#">シラバス登録</a>
+        <a href="#">TODOリスト登録</a>
+    </div>
+    <a href="#" class="logout">ログアウト</a>
+  </header>
+
+  <div id="title"> 
+    <h1>履修登録</h1>
+    <span class="highlight">2025後期履修登録</span>
+  </div>
+
+  <div class="container">
+    <div class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th>コマ＼曜日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1限</th>
+            <td><ul id="cell-1"></ul></td>
+            <td><ul id="cell-5"></ul></td>
+            <td><ul id="cell-9"></ul></td>
+            <td><ul id="cell-13"></ul></td>
+            <td><ul id="cell-17"></ul></td>
+          </tr>
+          <tr>
+            <th>2限</th>
+            <td><ul id="cell-2"></ul></td>
+            <td><ul id="cell-6"></ul></td>
+            <td><ul id="cell-10"></ul></td>
+            <td><ul id="cell-14"></ul></td>
+            <td><ul id="cell-18"></ul></td>
+          </tr>
+          <tr>
+            <th>3限</th>
+            <td><ul id="cell-3"></ul></td>
+            <td><ul id="cell-7"></ul></td>
+            <td><ul id="cell-11"></ul></td>
+            <td><ul id="cell-15"></ul></td>
+            <td><ul id="cell-19"></ul></td>
+          </tr>
+          <tr>
+            <th>4限</th>
+            <td><ul id="cell-4"></ul></td>
+            <td><ul id="cell-8"></ul></td>
+            <td><ul id="cell-12"></ul></td>
+            <td><ul id="cell-16"></ul></td>
+            <td><ul id="cell-20"></ul></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="submit" class="submit-button">履修確定</button>
+
+    </div>
+    <div class="search-section">
+     <form method="POST" action="{{ url_for('timetable.register_subject') }}">
+      <div class="search-results">
+       {% for l in dict_list %}
+        <label>
+          <input type="checkbox" name="subjects" class="subject-check" value="{{l['id']}}">{{l['name']}}<br>
+        </label>
+       {% endfor %}
+      </div>
+
+ 
+</form>
+
+    </div>
+  </div>
+
+      <script> 
+            const subjectList = {{ dict_list | tojson }};
+            
+            document.querySelectorAll(".subject-check").forEach(checkbox => { checkbox.addEventListener("change", () => { const subject = subjectList.find(s => s.id == checkbox.value); 
+                subject.schedule.forEach(time => { const cellId = `cell-${time}`; 
+                const ul = document.getElementById(cellId); 
+                if (checkbox.checked) { 
+                    const li = document.createElement("li");  
+                    li.textContent = subject.name; 
+                    li.setAttribute("data-subject-id", subject.id); 
+                    ul.appendChild(li); 
+                } else { 
+                    const liToRemove = ul.querySelector(`li[data-subject-id="${subject.id}"]`); 
+                    if (liToRemove) { 
+                        ul.removeChild(liToRemove); 
+                    } 
+                } 
+            }); 
+        }); 
+    }); 
+    </script>
 </body>
 </html>

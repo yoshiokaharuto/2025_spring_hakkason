@@ -24,8 +24,17 @@
     <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
 </header>
 
-
 <body>
+    <header>
+        <div class="logo"></div>
+        <div class="nav-links">
+            <a href="./html/mypage.html">マイページ</a>
+            <a href="#">シラバス一覧</a>
+            <a href="{{url_for('timetable.course_register')}}">時間割登録</a>
+            <a href="#">TODOリスト登録</a>
+        </div>
+        <a href="{{url_for('login')}}" class="logout">ログアウト</a>
+    </header>
     <div class="parent1">
         <div class="parentleft">{{account_data[2]}} {{account_data[1]}}年 {{account_data[0]}}</div>
     </div>

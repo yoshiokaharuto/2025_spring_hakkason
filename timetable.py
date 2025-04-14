@@ -12,7 +12,7 @@ def course_register():
     keys = ['id', 'name', 'teacher', 'schedule']
     dict_list = [dict(zip(keys, row)) for row in subject_list]
     
-    return render_template('syllabusregistration.html' ,dict_list=dict_list)
+    return render_template('course_register.html' ,dict_list=dict_list)
 
 @timetable_bp.route('/register_subject', methods=['POST'])
 def register_subject():
