@@ -102,6 +102,27 @@ def serch():
     subjects = db.search(semester_name, subject_name)
     return render_template('syllabus.html', subjects=subjects)
 
+@app.route('/')
+def review_form():
+    return render_template('review.html')
+
+@app.route('/review', methods=['POST'])
+def create_review():
+    content = request.form.get('content')
+    difficulty = request.form.get('difficulty')
+    assignment = request.form.get('assignment')
+    interest = request.form.get('interest')
+    speed = request.form.get('speed')
+    other = request.form.get('other')
+
+    count = db.review(content, difficulty, assignment, interest, speed, other)
+
+    if count == 1:
+        session.clear() 
+        return render_template('main.html')
+    else:
+        return render_template('review.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -130,7 +130,25 @@ def search(semester_name, subject_name):
     except Exception as e:
         print(f"エラー: {e}")
         return []
-    
+      
+def review(content, difficulty, assignment, interest, speed, other):
+    sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
+    count = 0  
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (content, difficulty, assignment, interest, speed, other))
+        connection.commit()
+        count = cursor.rowcount  
+    except psycopg2.DatabaseError as e:
+        print(f"Database error: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return count
+
 def get_account_data(account_id):
     sql = "SELECT accounts.name,accounts.grade,departments.name FROM accounts JOIN departments ON accounts.department_id = departments.department_id WHERE accounts.account_id =%s;"
     
