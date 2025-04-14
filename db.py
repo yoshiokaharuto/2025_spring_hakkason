@@ -209,6 +209,25 @@ def my_credit_data(account_id):
     
     return result
 
+
+def absence(date):
+    sql = 'INSERT INTO attendances (absent_date) VALUES (%s)'
+    count = 0  
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (date,))
+        connection.commit()
+        count = cursor.rowcount  
+    except psycopg2.DatabaseError as e:
+        print(f"Database error: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return count
+
     
 def insert_todo(deadline, todo_text, account_id):
     sql = 'INSERT INTO todos (deadline, content, account_id) VALUES (%s, %s, %s)'
@@ -260,4 +279,5 @@ def delete_todo_by_id(todo_id, account_id):
             connection.commit()
     except Exception as e:
         print(f"TODO削除エラー: {e}")
+
 

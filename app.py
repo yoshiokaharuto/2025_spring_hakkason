@@ -125,6 +125,30 @@ def create_review():
     else:
         return render_template('review.html')
 
+
+@app.route('/')
+def absence_form():
+    return render_template('absence.html')
+
+@app.route('/absence', methods=['POST'])
+def Absence_exe():
+    absent_date = request.form.get('absent_date')
+    
+    session['absent_date'] = absent_date
+
+    return render_template('absenceconfirm.html', absent_date = absent_date)    
+
+@app.route('/Absence_registration', methods=['POST'])
+def Absence_registration():
+    absent_date = session.get('absent_date')
+
+    count = db.absence(absent_date)
+    if count == 1:
+        session.clear() 
+        return render_template('main.html')
+    else:
+        return render_template('absenceconfirm.html')
+
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if 'user_id' not in session:
@@ -159,6 +183,7 @@ def complete_todo():
         error_message = "削除するTODOを選択してください。"
         todos = db.get_todos(session['user_id'])
         return render_template('main.html', error=error_message, todos=todos)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
