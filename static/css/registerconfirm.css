@@ -17,7 +17,8 @@
 .login-container p strong {
   width: 200px;
   text-align: right;
-  margin-right: 100px;
+  margin-right: 150px;
+  margin-left: 40px;
   font-weight: normal;
 }
 
@@ -49,20 +50,20 @@
 
 .login-container button[type="button"] {
   position: absolute;
-  bottom: -50px;
-  left: 30%;
+  bottom: -80px;
+  left: 40%;
   transform: translateX(-50%);
 }
 
 .login-container button[type="submit"] {
   position: absolute;
-  bottom: -50px;
-  right: 30%;
+  bottom: -80px;
+  right: 40%;
   transform: translateX(50%);
 }
 
 .login-container button{
-  width: 20%;
+  width: 10%;
     background-color: #379c98;
     color: white;
     border: none;
@@ -73,4 +74,8 @@
     margin: 0 auto;
     display: block;
     box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.login-container button:hover {
+  background-color: #2d8a86;
 }

@@ -78,14 +78,18 @@ h1 {
 }
 
 .submit-btn {
-  background-color: #5bb7b7;
-  color: white;
-  border: none;
-  padding: 10px 30px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
+  background-color: #3dada7;
+            color: white;
+            border: none;
+            padding: 10px 40px;
+            font-size: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:hover {
+  background-color: #2d8a86;
 }
 
 .past-absences {

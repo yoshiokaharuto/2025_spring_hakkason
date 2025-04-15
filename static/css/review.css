@@ -84,13 +84,18 @@ input[type="radio"] {
 }
 
 .button {
-  padding: 10px 30px;
-  background-color: #48a6a7;
+  background-color: #3dada7;
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 10px 40px;
+  font-size: 20px;
+  border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+  background-color: #2d8a86;
 }
 
 .left {
