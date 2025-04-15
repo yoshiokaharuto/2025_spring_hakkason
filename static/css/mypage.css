@@ -98,9 +98,9 @@ body {
   display: flex;
   justify-content: space-between; /* 左右に分ける */
   gap: 0; /* テーブル間の余白なしにしたいならここを0に */
-  width: 100vw; /* 画面いっぱいに広げる */
+  width: 100%; /* 画面いっぱいに広げる */
   padding: 0;
-  margin: 25px 0 0 0;
+  /* margin: 25px 0 0 0px; */
 }
 
 table {
