@@ -9,16 +9,28 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo"></div>
-    <div class="nav-links">
-        <a href="./html/mypage.html">マイページ</a>
-        <a href="#">シラバス一覧</a>
-        <a href="#">シラバス登録</a>
-        <a href="#">TODOリスト登録</a>
-    </div>
-    <a href="#" class="logout">ログアウト</a>
-  </header>
+    <header>
+        <a href="" class="">
+            <img src="../static/img/icon1.png" alt="logo" id="logo-img" style="width: 80px; height: 80px;">
+        </a>
+        <!-- JSで画像の変更する -->
+        <script>
+            const logoImg = document.getElementById("logo-img");
+            logoImg.addEventListener("mouseover", function () {
+            this.src = "../static/img/logo.png";
+           });
+            logoImg.addEventListener("mouseout", function () {
+            this.src = "../static/img/icon1.png";
+           });
+        </script>
+        <div class="nav-links">
+            <a href="{{url_for('mypage.mypage')}}">マイページ</a>
+            <a href="{{url_for('syllabus')}}">シラバス一覧</a>
+            <a href="{{url_for('timetable.course_register')}}">シラバス登録</a>
+            <a href="{{url_for('todo')}}">TODOリスト登録</a>
+        </div>
+        <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
+    </header>
 
   <div id="title"> 
     <h1>履修登録</h1>
