@@ -44,27 +44,29 @@ def insert_user(name, email, password, grade, department_id):
 
 def login(email, password):
     sql = 'SELECT password_hash, salt FROM accounts WHERE email = %s'
-    flg = True
-    
+    flg = False  
+
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        
         cursor.execute(sql, (email,))
         user = cursor.fetchone()
-        
+
         if user:
             salt = user[1]
             hashed_password = get_hash(password, salt)
-            
+
             if hashed_password == user[0]:
                 flg = True  
     except psycopg2.DatabaseError as db_error:
-        flg = False  
+        print(f"DBエラー: {db_error}")
+        flg = False
     finally:
+        if cursor:
             cursor.close()
+        if connection:
             connection.close()
-    
+
     return flg
 
 def select_user(email):
@@ -110,7 +112,7 @@ def register_subject(user_id,subject_id):
     return result
 
 def syllabus():
-    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
+    sql = 'SELECT subject.subject_id,regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id'
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
@@ -131,14 +133,15 @@ def search(semester_name, subject_name):
         print(f"エラー: {e}")
         return []
 
+
       
-def review(content, difficulty, assignment, interest, speed, other):
-    sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
+def review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment):
+    sql = 'INSERT INTO reviews (account_id,subject_id,content, difficulty, assignment, interest, speed, other) VALUES (%s,%s,%s, %s, %s, %s, %s, %s);'
     count = 0  
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (content, difficulty, assignment, interest, speed, other))
+        cursor.execute(sql, (user_id,sub_id,content, difficulty, assignment, interest, speed, understanding))
         connection.commit()
         count = cursor.rowcount  
     except psycopg2.DatabaseError as e:
@@ -228,6 +231,8 @@ def absence(date):
             connection.close()
         return count
 
+
+
     
 def insert_todo(deadline, todo_text, account_id):
     sql = 'INSERT INTO todos (deadline, content, account_id) VALUES (%s, %s, %s)'
@@ -280,4 +285,47 @@ def delete_todo_by_id(todo_id, account_id):
     except Exception as e:
         print(f"TODO削除エラー: {e}")
 
+def syllabus_detail(id):
+    sql = "SELECT subject_id,subject.name,regulation_subject.name,credit,semester,recommended_grade,teachers.name FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id JOIN teachers ON subject.teacher_id = teachers.teacher_id where subject_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
 
+def previous_data(id):
+    sql = "SELECT g.grade,COALESCE(pa.student_count, 0) AS student_count FROM generate_series(1, 4) AS g(grade) LEFT JOIN previous_attendance pa ON pa.grade = g.grade AND pa.subject_id = %s ORDER BY g.grade;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+    
+def review_list(id):
+    sql="SELECT content, difficulty, assignment, interest, speed, other,created_at::date FROM reviews WHERE subject_id = %s"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result

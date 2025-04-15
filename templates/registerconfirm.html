@@ -2,20 +2,20 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>確認画面</title>
-    <link rel="stylesheet" href="../static/css/allstyle.css">
-    <link rel="stylesheet" href="../static/css/login.css">
+    <title>アカウント登録確認画面</title>
+    <link rel="stylesheet" href="../static/css/registerconfirm.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/allstyle.css">
 </head>
 <body>
     <div class="login-container">
         <form method="POST" action="{{ url_for('register_complete') }}">
         <h1>アカウント登録確認</h1>
         
-        <p><strong>学年:</strong> {{ grade }}学年</p>
-        <p><strong>学科:</strong> {{ department_id }}</p>
-        <p><strong>名前:</strong> {{ name }}</p>
-        <p><strong>メールアドレス:</strong> {{ email }}</p>
+        <p><strong>学年：</strong> {{ grade }}学年</p>
+        <p><strong>学科：</strong> {{ department_id }}</p>
+        <p><strong>名前：</strong> {{ name }}</p>
+        <p><strong>メールアドレス：</strong> {{ email }}</p>
         
             <button type="button" class="submit-button" onclick="window.history.back();">戻る</button>
             <button type="submit" class="submit-button">登録完了</button>
