@@ -8,6 +8,11 @@ h1 {
   margin-top: 20px;
 }
 
+.logoicon {
+  height: 30px;
+  width: 30px;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
