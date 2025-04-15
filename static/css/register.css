@@ -1,5 +1,4 @@
 body {
-    font-size: 20px;
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
@@ -78,3 +77,10 @@ td {
 .return_button {
     background-color: transparent;
 }
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+

@@ -32,6 +32,7 @@
                             <option value="3">３学年</option>
                             <option value="4">４学年</option>
                         </select>
+                        <div class="error-message" id="error-year"></div>
                     </td>                    
                 </tr>
                 <tr>
@@ -42,33 +43,41 @@
                             <option value="2">総合システム工学科</option>
                             <option value="3">高度情報工学科</option>
                         </select>
+                        <div class="error-message" id="error-department"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="text" name="name" class="short" placeholder="名前" required>
+                        <div class="error-message" id="error-name"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="email" name="email" class="long" placeholder="メールアドレス" required>
+                        <div class="error-message" id="error-email"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="password" name="password" class="long" placeholder="パスワード" required>
+                        <div class="error-message" id="error-password"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <input type="password" name="confirm_password" class="long" placeholder="パスワード（確認）" required>
+                        <div class="error-message" id="error-confirm_password"></div>
                     </td>
                 </tr>
+                
             </table>
             <button type="submit" class="submit-button">作成</button>
         </form>
     </div>
 
     <script src="../static/js/register.js"></script>
+    <script src="{{ url_for('static', filename='../static/js/register.js') }}"></script>
+
 </body>
 </html>
