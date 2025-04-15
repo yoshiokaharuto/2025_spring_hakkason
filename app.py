@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import db, string, random, re
 from timetable import timetable_bp
 from mypage import mypage_bp
+from syllabus import syllabus_bp
 from datetime import timedelta
 
 
@@ -10,6 +11,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
 
 app.register_blueprint(timetable_bp)
 app.register_blueprint(mypage_bp)
+app.register_blueprint(syllabus_bp)
 
 
 @app.route('/')
@@ -140,14 +142,15 @@ def review_form():
 
 @app.route('/review', methods=['POST'])
 def create_review():
+    user_id = session['user_id']
+    sub_id = session['subject_id']
     content = request.form.get('content')
     difficulty = request.form.get('difficulty')
-    assignment = request.form.get('assignment')
-    interest = request.form.get('interest')
     speed = request.form.get('speed')
-    other = request.form.get('other')
-
-    count = db.review(content, difficulty, assignment, interest, speed, other)
+    interest = request.form.get('interest')
+    understanding = request.form.get('understanding')
+    assignment = request.form.get('assignment')
+    count = db.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
 
     if count == 1:
         return redirect(url_for('main'))
