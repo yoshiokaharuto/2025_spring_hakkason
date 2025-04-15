@@ -121,7 +121,6 @@ def create_review():
     interest = request.form.get('interest')
     understanding = request.form.get('understanding')
     assignment = request.form.get('assignment')
-
     count = db.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
 
     if count == 1:
