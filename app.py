@@ -113,14 +113,17 @@ def review_form():
 
 @app.route('/review', methods=['POST'])
 def create_review():
+    user_id = session['user_id']
+    print(user_id)
+    sub_id = session['subject_id']
     content = request.form.get('content')
     difficulty = request.form.get('difficulty')
     assignment = request.form.get('assignment')
     interest = request.form.get('interest')
     speed = request.form.get('speed')
-    other = request.form.get('other')
+    other = request.form.get('assignment')
 
-    count = db.review(content, difficulty, assignment, interest, speed, other)
+    count = db.review(user_id,sub_id,content, difficulty, assignment, interest, speed, other)
 
     if count == 1:
         return redirect(url_for('main'))
