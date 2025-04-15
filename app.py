@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-import db, string, random
+import db, string, random, re
 from timetable import timetable_bp
 from mypage import mypage_bp
 from datetime import timedelta
@@ -28,6 +28,24 @@ def register_exe():
     password = request.form.get('password')
     grade = request.form.get('year')
     department_id = request.form.get('department')
+    
+    # バリデーションチェック
+    error = None
+    if not name or not email or not password or not grade or not department_id:
+        error = "すべての項目を入力してください。"
+    elif len(name) > 50:
+        error = "名前は50文字以内で入力してください。"
+    elif '@' not in email or '.' not in email:
+        error = "有効なメールアドレスを入力してください。"
+    elif len(password) < 6:
+        error = "パスワードは6文字以上で入力してください。"
+    elif not re.search(r'[A-Za-z]', password):
+        error = "パスワードには少なくとも1つの英字が必要です。"
+    elif not re.search(r'[0-9]', password):
+        error = "パスワードには少なくとも1つの数字が必要です。"
+
+    if error:
+        return render_template('register.html', error=error, name=name, email=email)
 
     session['name'] = name
     session['email'] = email
@@ -63,17 +81,26 @@ def register_complete():
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
-    
-    
+
+    # バリデーションチェック
+    error = None
+    if not email or not password:
+        error = "メールアドレスとパスワードを入力してください。"
+    elif '@' not in email or '.' not in email:
+        error = "メールアドレスの形式が正しくありません。"
+
+    if error:
+        return render_template('login.html', error=error)
+
     if db.login(email, password):
         account = db.select_user(email)
         session['user'] = True
         session['user_id'] = account[0]
         session.permanent = True
         app.permanent_session_lifetime = timedelta(minutes=30)
-        
+
         return redirect(url_for('main'))
-    else :
+    else:
         error = 'メールアドレスまたはパスワードが違います。'
         return render_template('login.html', error=error)
     

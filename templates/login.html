@@ -10,6 +10,13 @@
 <body>
     <div class="login-container">
         <h1>ログイン</h1>
+
+        {% if error %}
+            <div style="color: red; margin-bottom: 13px; font-weight: bold;">
+                {{ error }}
+            </div>
+        {% endif %}
+
         <form action="{{url_for('login')}}" method="POST">
             <input type="email" name="email" placeholder="メールアドレス" required>
             <input type="password" name="password" placeholder="パスワード" required>

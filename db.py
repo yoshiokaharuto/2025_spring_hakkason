@@ -44,27 +44,29 @@ def insert_user(name, email, password, grade, department_id):
 
 def login(email, password):
     sql = 'SELECT password_hash, salt FROM accounts WHERE email = %s'
-    flg = True
-    
+    flg = False  
+
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        
         cursor.execute(sql, (email,))
         user = cursor.fetchone()
-        
+
         if user:
             salt = user[1]
             hashed_password = get_hash(password, salt)
-            
+
             if hashed_password == user[0]:
                 flg = True  
     except psycopg2.DatabaseError as db_error:
-        flg = False  
+        print(f"DBエラー: {db_error}")
+        flg = False
     finally:
+        if cursor:
             cursor.close()
+        if connection:
             connection.close()
-    
+
     return flg
 
 def select_user(email):
