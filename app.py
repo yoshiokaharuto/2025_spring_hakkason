@@ -114,7 +114,6 @@ def review_form():
 @app.route('/review', methods=['POST'])
 def create_review():
     user_id = session['user_id']
-    print(user_id)
     sub_id = session['subject_id']
     content = request.form.get('content')
     difficulty = request.form.get('difficulty')
