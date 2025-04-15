@@ -74,22 +74,9 @@
             <div class="section-title">授業レビュー</div>
             <div class="review-box">
                 <ul>
-                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
-                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
-                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
-                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
-                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
-                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
-                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
-                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
-                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
-                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
-                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
-                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
-                    <li>・友達ができました。<span class="date">2025-04-01</span></li>
-                    <li>・発表がうまくいきました。<span class="date">2025-04-05</span></li>
-                    <li>・グループワークが楽しかったです。<span class="date">2025-04-08</span></li>
-                    <!-- さらにレビューを追加してスクロールできるように -->
+                    {% for l in review_list%}
+                    <li>{{l[0]}}<span class="date">{{l[6]}}</span></li>
+                    {% endfor%}
                 </ul>
             </div>
 
