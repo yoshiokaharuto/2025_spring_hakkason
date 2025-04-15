@@ -88,6 +88,7 @@ def main():
     
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
+
     session.clear()
     return redirect(url_for('index'))
 
@@ -104,6 +105,7 @@ def serch():
     subject_name = request.args.get('subject_name', '')
     subjects = db.search(semester_name, subject_name)
     return render_template('syllabus.html', subjects=subjects)
+
 
 @app.route('/review_form')
 def review_form():
@@ -149,6 +151,8 @@ def Absence_registration():
     else:
         return render_template('absenceconfirm.html')
 
+
+
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if 'user_id' not in session:
@@ -167,7 +171,10 @@ def todo():
             return render_template('todo_register.html', error=error_message)
     else:
         return render_template('todo_register.html')
+
     
+
+
 @app.route('/complete_todo', methods=['POST'])
 def complete_todo():
     if 'user_id' not in session:
@@ -183,6 +190,9 @@ def complete_todo():
         error_message = "削除するTODOを選択してください。"
         todos = db.get_todos(session['user_id'])
         return render_template('main.html', error=error_message, todos=todos)
+
+
+
 
 
 if __name__ == '__main__':

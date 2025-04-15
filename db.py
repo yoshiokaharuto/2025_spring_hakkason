@@ -131,6 +131,7 @@ def search(semester_name, subject_name):
         print(f"エラー: {e}")
         return []
 
+
       
 def review(content, difficulty, assignment, interest, speed, other):
     sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
@@ -227,6 +228,8 @@ def absence(date):
         if connection:
             connection.close()
         return count
+
+
 
     
 def insert_todo(deadline, todo_text, account_id):
