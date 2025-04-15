@@ -132,13 +132,13 @@ def search(semester_name, subject_name):
         return []
 
       
-def review(content, difficulty, assignment, interest, speed, other):
-    sql = 'INSERT INTO reviews (content, difficulty, assignment, interest, speed, other) VALUES (%s, %s, %s, %s, %s, %s)'
+def review(user_id,sub_id,content, difficulty, assignment, interest, speed, other):
+    sql = 'INSERT INTO reviews (account_id,subject_id,content, difficulty, assignment, interest, speed, other) VALUES (%s,%s,%s, %s, %s, %s, %s, %s);'
     count = 0  
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (content, difficulty, assignment, interest, speed, other))
+        cursor.execute(sql, (user_id,sub_id,content, difficulty, assignment, interest, speed, other))
         connection.commit()
         count = cursor.rowcount  
     except psycopg2.DatabaseError as e:
@@ -275,3 +275,19 @@ def syllabus_detail(id):
     connection.close()
     
     return result
+
+def previous_data(id):
+    sql = "SELECT g.grade,COALESCE(pa.student_count, 0) AS student_count FROM generate_series(1, 4) AS g(grade) LEFT JOIN previous_attendance pa ON pa.grade = g.grade AND pa.subject_id = %s ORDER BY g.grade;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+    
