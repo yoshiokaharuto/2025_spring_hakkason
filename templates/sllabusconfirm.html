@@ -60,17 +60,17 @@
             </table>
         </div>
 
-        <!-- 右側：前年度受講人数 -->
         <div class="right">
             <div class="section-title">前年度受講人数</div>
             <div class="box">
-                <p>1年生：20人</p>
-                <p>2年生：20人</p>
-                <p>3年生：20人</p>
-                <p>4年生：20人</p>
+                <p>{{prev_data[0][0]}}年生：{{prev_data[0][1]}}人</p>
+                <p>{{prev_data[1][0]}}年生：{{prev_data[1][1]}}人</p>
+                <p>{{prev_data[2][0]}}年生：{{prev_data[2][1]}}人</p>
+                <p>{{prev_data[3][0]}}年生：{{prev_data[3][1]}}人</p>
             </div>
             <div class="section-title">レーダーチャート</div>
             <canvas id="radarChart" width="100" height="100"></canvas>
+            <a href="{{url_for('review_form')}}?id={{detail_data[0]}}">レビュー投稿</a>
             <div class="section-title">授業レビュー</div>
             <div class="review-box">
                 <ul>
