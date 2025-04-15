@@ -40,6 +40,11 @@ input, select {
     box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
+.submit-button:hover {
+    background-color: #2d8a86;
+}
+
+
 table {
     width: 100%;
     border-collapse: collapse;
