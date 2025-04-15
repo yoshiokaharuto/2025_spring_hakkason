@@ -7,7 +7,13 @@ const radarChart = new Chart(ctx, {
     datasets: [
       {
         label: "授業評価",
-        data: [5, 2, 5, 4, 3], // 初期値。必要に応じて動的に更新可能
+        data: [
+          average["difficulty"] || 0,
+          average["speed"] || 0,
+          average["assignment"] || 0,
+          average["understanding"] || 0,
+          average["assignment"] || 0,
+        ], // 初期値。必要に応じて動的に更新可能
         backgroundColor: "rgba(255, 174, 66, 0.6)", // 塗りつぶし色
         borderColor: "#FFAE42", // 線の色
         pointBackgroundColor: "#FFAE42",
