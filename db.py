@@ -132,13 +132,13 @@ def search(semester_name, subject_name):
         return []
 
       
-def review(user_id,sub_id,content, difficulty, assignment, interest, speed, other):
+def review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment):
     sql = 'INSERT INTO reviews (account_id,subject_id,content, difficulty, assignment, interest, speed, other) VALUES (%s,%s,%s, %s, %s, %s, %s, %s);'
     count = 0  
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (user_id,sub_id,content, difficulty, assignment, interest, speed, other))
+        cursor.execute(sql, (user_id,sub_id,content, difficulty, assignment, interest, speed, understanding))
         connection.commit()
         count = cursor.rowcount  
     except psycopg2.DatabaseError as e:
@@ -291,3 +291,17 @@ def previous_data(id):
     
     return result
     
+def review_list(id):
+    sql="SELECT content, difficulty, assignment, interest, speed, other,created_at::date FROM reviews WHERE subject_id = %s"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
