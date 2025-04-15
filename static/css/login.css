@@ -10,7 +10,7 @@ body {
 }
 
 .login-container {
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     border-radius: 10px;
     width: 500px;
     text-align: center;
@@ -44,7 +44,7 @@ input {
 .links {
     font-size: 32px;
     position: fixed;
-    bottom: 15%;
+    bottom: 25%;
     right: 15%;
     text-align: right;
     text-decoration: underline;

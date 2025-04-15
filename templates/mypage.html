@@ -22,17 +22,21 @@
             <a href="{{url_for('timetable.course_register')}}">時間割登録</a>
             <a href="#">TODOリスト登録</a>
         </div>
-        <a href="{{url_for('login')}}" class="logout">ログアウト</a>
+        <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
     </header>
     <div class="parent1">
         <div class="parentleft">{{account_data[2]}} {{account_data[1]}}年 {{account_data[0]}}</div>
     </div>
 
     <div class="score-chart-wrap">
-        <div class="score-box" data-subject="情報システム設計論" data-score="{{my_data[0]}}" data-allscore="{{credit_data[0]}}"></div>
-        <div class="score-box" data-subject="システム開発演習" data-score="{{my_data[1]}}" data-allscore="{{credit_data[1]}}"></div>
-        <div class="score-box" data-subject="システム開発実践" data-score="{{my_data[2]}}" data-allscore="{{credit_data[2]}}"></div>
-        <div class="score-box" data-subject="キャリア<br>デザイン" data-score="{{my_data[3]}}" data-allscore="{{credit_data[3]}}"></div>
+        <div class="score-box" data-subject="情報システム設計論" data-score="{{my_data[0]}}" data-allscore="{{credit_data[0]}}">
+        </div>
+        <div class="score-box" data-subject="システム開発演習" data-score="{{my_data[1]}}" data-allscore="{{credit_data[1]}}">
+        </div>
+        <div class="score-box" data-subject="システム開発実践" data-score="{{my_data[2]}}" data-allscore="{{credit_data[2]}}">
+        </div>
+        <div class="score-box" data-subject="キャリア<br>デザイン" data-score="{{my_data[3]}}"
+            data-allscore="{{credit_data[3]}}"></div>
     </div>
     <div class="container">
         <table id="leftTable">

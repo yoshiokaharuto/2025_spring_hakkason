@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="../static/css/allstyle.css">
     <link rel="stylesheet" href="../static/css/header.css">
     <link rel="stylesheet" href="../static/css/absence.css">
+
 </head>
+
+
 
 <body>
     <header>
@@ -21,34 +24,21 @@
             <a href="#">シラバス登録</a>
             <a href="#">TODOリスト登録</a>
         </div>
-        <a href="{{url_for('logout')}}" class="logout">ログアウト</a>
+        <a href="{{url_for('logout')}}" class="logout">ログアウト</a> 
     </header>
-
     <div class="container">
         <!-- メインエリア -->
-        <form method="POST" action="{{url_for('Absence_exe')}}">
+        <form method="POST" action="{{url_for('Absence_registration')}}">
             <div class="main">
                 <h1>欠席登録</h1>
                 <div class="form-area">
                 <p><strong>科目名：</strong>Java応用(Spring_boot)①</p>
-                <label for="date"><strong>欠席日：</strong></label>
-                <input type="date" id="date" name="absent_date">
+                <label for="date"><strong>欠席日：{{ absent_date }}</strong></label>
                 <br>
+                <button class="submit-btn" onclick="window.history.back();">戻る</button>
                 <button class="submit-btn">登録</button>
             </div>
         </form>
-
-
-        <div class="sidebar">
-            <div class="past-absences">
-                <h2>過去の欠席</h2>
-                <ul>
-                    <li>2025/04/02(火)</li>
-                    <li>2025/04/02(火)</li>
-                    <li>2025/04/02(火)</li>
-                </ul>
-            </div>
-        </div>
     </div>
 </body>
 

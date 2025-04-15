@@ -131,6 +131,7 @@ def search(semester_name, subject_name):
         print(f"エラー: {e}")
         return []
 
+
       
 def review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment):
     sql = 'INSERT INTO reviews (account_id,subject_id,content, difficulty, assignment, interest, speed, other) VALUES (%s,%s,%s, %s, %s, %s, %s, %s);'
@@ -208,6 +209,27 @@ def my_credit_data(account_id):
     connection.close()
     
     return result
+
+
+def absence(date):
+    sql = 'INSERT INTO attendances (absent_date) VALUES (%s)'
+    count = 0  
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (date,))
+        connection.commit()
+        count = cursor.rowcount  
+    except psycopg2.DatabaseError as e:
+        print(f"Database error: {e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return count
+
+
 
     
 def insert_todo(deadline, todo_text, account_id):
