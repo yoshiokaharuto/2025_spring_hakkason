@@ -329,3 +329,18 @@ def review_list(id):
     connection.close()
     
     return result
+
+def get_timetable(id):
+    sql = "SELECT s.name, sd.position FROM timetable t JOIN subject_days sd ON t.subject_id = sd.subject_id JOIN subject s ON s.subject_id = t.subject_id WHERE t.account_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (id,))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result

@@ -20,7 +20,10 @@ def syllabus_detail():
         for i in range(5):
             sums[i] += row[i+1]
             
-    ave = {key:round(sums[i] / count, 2) for i , key in enumerate(keys)}
+    ave = {
+    key: round(sums[i] / count, 1) if count != 0 else 0.0
+    for i, key in enumerate(keys)
+    }
     
     session['subject_id'] = detail_data[0]
     

@@ -35,7 +35,20 @@
 
 <div class="container">
   <div class="left">
-    <div id="date">xxxx/xx/x(x)</div>
+    <div id="date">
+      <p id="today-date"></p>
+
+<script>
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // 月は0始まり
+  const dd = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${yyyy}/${mm}/${dd}`;
+
+  document.getElementById('today-date').textContent = `${formattedDate}`;
+</script>
+
+    </div>
 
     <!-- 曜日 -->
     <div class="days-row">
@@ -58,18 +71,19 @@
 
       <!-- 表本体 -->
       <table class="timetable">
+        {% set day_labels = ['mon', 'tue', 'wed', 'thu', 'fri'] %}
+        {% set rows = 4 %}
+        {% set cols = 5 %}
+        {% for row in range(rows) %}
         <tr>
-          <td></td><td></td><td></td><td></td><td></td>
+          {% for col in range(cols) %}
+          {% set position = col * rows + row + 1 %}
+          <td>
+            {{ timetable_map.get(position, '') }}
+          </td>
+          {% endfor %}
         </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td>
-        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
