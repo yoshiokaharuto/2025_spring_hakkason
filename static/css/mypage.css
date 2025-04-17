@@ -121,3 +121,8 @@ td {
 th {
   background-color: #ffffff;
 }
+
+.parent1 {
+  padding: 20px;
+  margin-left: 10px;
+}

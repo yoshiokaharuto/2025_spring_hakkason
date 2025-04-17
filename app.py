@@ -160,7 +160,7 @@ def create_review():
     count = db.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
 
     if count == 1:
-        return render_template('sllabusconfirm.html')
+        return redirect(url_for('syllabus.syllabus_detail'))
     else:
         return render_template('review.html')
 
