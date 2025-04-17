@@ -27,6 +27,7 @@ nav a:first-child {
 .container {
   display: flex;
   padding: 120px;
+  flex-wrap: nowrap; /* 折り返さないように追加 */
 }
 
 .left {
@@ -36,6 +37,7 @@ nav a:first-child {
 .right {
   flex: 1;
   padding-left: 40px;
+  min-width: 300px; /* 最低幅を確保（必要に応じて） */
 }
 
 #date {
@@ -60,12 +62,11 @@ nav a:first-child {
   padding: 10px 0;
 }
 
-/* 各曜日ごとの調整 */
-.mon { margin-left: 35px; }
-.tue { margin-left: 2px; }
-.wed { margin-left: 4px; }
-.thu { margin-left: 2px; }
-.fri { margin-right: 10px; }
+.mon { margin-left: 50px; }
+.tue { margin-left: 0px; }
+.wed { margin-left: 0px; }
+.thu { margin-left: 0px; }
+.fri { margin-left: 0px; }
 
 .days-row div {
   display: table-cell;
@@ -73,9 +74,11 @@ nav a:first-child {
   padding: 10px 0;
 }
 
+/* 時間割ラッパー */
 .timetable-wrapper {
   display: flex;
   align-items: start;
+  flex-shrink: 0; /* 表を縮めないように追加 */
 }
 
 /* 時間列 */
@@ -90,7 +93,6 @@ nav a:first-child {
   height: 100%;
 }
 
-/* 各時間の調整 */
 .time-column div {
   text-align: right;
   padding-right: 10px;
@@ -98,39 +100,36 @@ nav a:first-child {
   flex-shrink: 0;
 }
 
-/* 各時間の調整 */
-.time-column .first-time {
-  margin-top: 0px;
-}
+.time-column .first-time { margin-top: 0px; }
+.time-column .second-time { margin-top: 80px; }
+.time-column .third-time { margin-top: 80px; }
+.time-column .fourth-time { margin-top: 85px; }
 
-.time-column .second-time {
-  margin-top: 60px;
-}
-
-.time-column .third-time {
-  margin-top: 65px;
-}
-
-.time-column .fourth-time {
-  margin-top: 65px;
-}
-
-/* 表 */
+/* 表（時間割） */
 .timetable {
   border-collapse: collapse;
   background-color: white;
-  width: 100%;
+  width: 800px; /* 基礎サイズを大きく */
+  table-layout: fixed;
 }
 
 .timetable td {
   border: 1px solid #000;
   text-align: center;
-  padding: 10px;
-  min-width: 100px;
-  height: 100px;
+  padding: 15px; /* パディング増加 */
+  min-width: 120px; /* セルの最小幅を広げる */
+  height: 120px; /* セルの高さも増加 */
+  word-break: break-word;
+  font-size: 18px; /* フォントサイズも少し大きく */
 }
 
-/* ToDo */
+.time-column {
+  width: 80px; /* 時間列も合わせて少し広げる */
+  font-size: 16px;
+}
+
+
+/* ToDo リスト */
 .todo-box {
   border: 2px solid #333;
   border-radius: 15px;
@@ -140,9 +139,8 @@ nav a:first-child {
   word-wrap: break-word;
   overflow-wrap: break-word;
   height: 300px;
-  overflow-y: scroll; /* 縦方向にスクロールを追加 */
+  overflow-y: scroll;
 }
-
 
 .todo-box ul {
   list-style: none;
@@ -180,7 +178,6 @@ nav a:first-child {
   background-color: #3aa3a3;
 }
 
-
 /* 出席 */
 .attendance-box {
   padding: 20px;
@@ -198,4 +195,38 @@ nav a:first-child {
 .attendance-box p {
   margin: 5px 0;
   font-size: 20px;
+}
+
+/* h1 タイトルの中央揃え（任意） */
+#title {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中央配置 */
+  padding: 20px 50px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* 送信ボタン（右下固定） */
+.submit-button {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4db6ac;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.submit-button:hover {
+  background-color: #2d8a86;
 }
