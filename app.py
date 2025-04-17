@@ -28,6 +28,7 @@ def register_exe():
     name = request.form.get('name')
     email = request.form.get('email')
     password = request.form.get('password')
+    confirm_password = request.form.get('confirm_password')
     grade = request.form.get('year')
     department_id = request.form.get('department')
     
@@ -39,6 +40,8 @@ def register_exe():
         error = "名前は50文字以内で入力してください。"
     elif '@' not in email or '.' not in email:
         error = "有効なメールアドレスを入力してください。"
+    elif password != confirm_password:
+        error = "パスワードが確認用と一致しません。"
     elif len(password) < 6:
         error = "パスワードは6文字以上で入力してください。"
     elif not re.search(r'[A-Za-z]', password):
@@ -157,7 +160,7 @@ def create_review():
     count = db.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
 
     if count == 1:
-        return redirect(url_for('main'))
+        return render_template('sllabusconfirm.html')
     else:
         return render_template('review.html')
 

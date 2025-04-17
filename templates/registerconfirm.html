@@ -13,7 +13,10 @@
         <h1>アカウント登録確認</h1>
         
         <p><strong>学年：</strong> {{ grade }}学年</p>
-        <p><strong>学科：</strong> {{ department_id }}</p>
+        <p><strong>学科：</strong>{% if department_id == '1' %} 情報システム科
+        {% elif department_id == '2' %} 総合システム科
+        {% elif department_id == '3' %} 高度情報工学科 
+        {% endif %}</p>
         <p><strong>名前：</strong> {{ name }}</p>
         <p><strong>メールアドレス：</strong> {{ email }}</p>
         

@@ -123,7 +123,7 @@ def syllabus():
         return []
  
 def search(semester_name, subject_name):
-    sql = 'SELECT regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id WHERE regulation_subject.name LIKE %s AND subject.name LIKE %s'
+    sql = 'SELECT subject.subject_id,  regulation_subject.name, subject.name, subject.credit, subject.semester, subject.recommended_grade FROM subject JOIN regulation_subject ON subject.regulation_subject_id = regulation_subject.regulation_subject_id WHERE regulation_subject.name LIKE %s AND subject.name LIKE %s'
     try:
         connection = get_connection()
         with connection.cursor() as cursor:
