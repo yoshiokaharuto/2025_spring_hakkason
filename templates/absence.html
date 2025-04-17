@@ -21,11 +21,11 @@
         <script>
             const logoImg = document.getElementById("logo-img");
             logoImg.addEventListener("mouseover", function () {
-            this.src = "../static/img/logo.png";
-           });
+                this.src = "../static/img/logo.png";
+            });
             logoImg.addEventListener("mouseout", function () {
-            this.src = "../static/img/icon1.png";
-           });
+                this.src = "../static/img/icon1.png";
+            });
         </script>
         <div class="nav-links">
             <a href="{{url_for('mypage.mypage')}}">マイページ</a>
@@ -37,28 +37,26 @@
     </header>
 
     <div class="container">
-        <!-- メインエリア -->
-        <form method="POST" action="{{url_for('absence_exe')}}">
-            <div class="main">
+        <!-- Flexで並べるための親要素 -->
+        <div class="main">
+            <form method="POST" action="{{url_for('absence_exe')}}">
                 <h1>欠席登録</h1>
                 <div class="form-area">
-                <p><strong>科目名：</strong>{{result[1]}}</p>
-                <label for="date"><strong>欠席日：</strong></label>
-                <input type="date" id="date" name="absent_date">
-                <br>
-                <button class="submit-btn">登録</button>
-            </div>
-        </form>
-
+                    <p><strong>科目名：</strong>{{result[1]}}</p>
+                    <label for="date"><strong>欠席日：</strong></label>
+                    <input type="date" id="date" name="absent_date">
+                    <br>
+                    <button class="submit-btn">登録</button>
+                </div>
+            </form>
+        </div>
 
         <div class="sidebar">
             <div class="past-absences">
                 <h2>過去の欠席</h2>
                 <ul>
                     {% for i in attendance %}
-                        <li>
-                            {{i[0]}}
-                        </li>
+                    <li>{{i[0]}}</li>
                     {% endfor %}
                 </ul>
             </div>
