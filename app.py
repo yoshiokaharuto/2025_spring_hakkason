@@ -109,13 +109,18 @@ def login():
         error = 'メールアドレスまたはパスワードが違います。'
         return render_template('login.html', error=error)
     
-@app.route('/main', methods=['GET'])
+@app.route('/main', methods=['GET','POST'])
 def main():
     if 'user' in session:
         todos = db.get_todos(session['user_id'])
         timetable = db.get_timetable(session['user_id'])
         
-        timetable_map = {position: subject_name for subject_name, position in timetable}
+        timetable_map = {}
+        for subject_id, name, position in timetable:
+            timetable_map[position] = {
+                "subject_id": subject_id,
+                "name": name
+            }
         
         subject_order = ['情報システム概論', 'システム開発演習', 'システム開発実践', 'キャリアデザイン']
         my_credit_data = db.my_credit_data(session['user_id'])
@@ -170,26 +175,39 @@ def create_review():
         return render_template('review.html')
 
 
-@app.route('/')
+@app.route('/absence_form')
 def absence_form():
-    return render_template('absence.html')
+    
+    id = request.args.get('id')
+    session['absence_id'] = id
+    result = db.syllabus_detail(id)
+    session['subject_name'] = result[1]
+    print(result)
+    
+    return render_template('absence.html',result=result)
 
-@app.route('/absence', methods=['POST'])
-def Absence_exe():
+@app.route('/absence_exe', methods=['POST'])
+def absence_exe():
     absent_date = request.form.get('absent_date')
     
     session['absent_date'] = absent_date
+    name = session['subject_name']
 
-    return render_template('absenceconfirm.html', absent_date = absent_date)    
+    return render_template('absenceconfirm.html', absent_date = absent_date, name=name)    
 
-@app.route('/Absence_registration', methods=['POST'])
-def Absence_registration():
+@app.route('/absence_registration', methods=['GET','POST'])
+def absence_registration():
     absent_date = session.get('absent_date')
-
-    count = db.absence(absent_date)
+    subject_id = session.get('absence_id')
+    account_id = session.get('user_id')
+    
+    timetable_id = db.get_timetable_id(subject_id, account_id)
+    print(timetable_id)
+    count = db.absence(absent_date,timetable_id)
     if count == 1:
-        session.clear() 
-        return render_template('main.html')
+        session.pop('subject_name', None)
+        session.pop('absent_date', None)
+        return redirect(url_for('main'))
     else:
         return render_template('absenceconfirm.html')
 

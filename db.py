@@ -213,13 +213,13 @@ def my_credit_data(account_id):
     return result
 
 
-def absence(date):
-    sql = 'INSERT INTO attendances (absent_date) VALUES (%s)'
+def absence(date, timetable_id):
+    sql = 'INSERT INTO attendances (absent_date,timetable_id) VALUES (%s, %s)'
     count = 0  
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (date,))
+        cursor.execute(sql, (date,timetable_id))
         connection.commit()
         count = cursor.rowcount  
     except psycopg2.DatabaseError as e:
@@ -231,7 +231,22 @@ def absence(date):
             connection.close()
         return count
 
-
+def get_timetable_id(subject_id, account_id):
+    sql="SELECT timetable_id FROM timetable WHERE subject_id = %s AND account_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (subject_id,account_id))
+    
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+    
+    
 
     
 def insert_todo(deadline, todo_text, account_id):
@@ -331,7 +346,7 @@ def review_list(id):
     return result
 
 def get_timetable(id):
-    sql = "SELECT s.name, sd.position FROM timetable t JOIN subject_days sd ON t.subject_id = sd.subject_id JOIN subject s ON s.subject_id = t.subject_id WHERE t.account_id = %s;"
+    sql = "SELECT s.subject_id,s.name, sd.position FROM timetable t JOIN subject_days sd ON t.subject_id = sd.subject_id JOIN subject s ON s.subject_id = t.subject_id WHERE t.account_id = %s;"
     
     connection = get_connection()
     cursor = connection.cursor()
