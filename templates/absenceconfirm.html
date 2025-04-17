@@ -16,7 +16,7 @@
 
 
 <body>
-        <header>
+    <header>
         <a href="{{url_for('main')}}" class="">
             <img src="../static/img/icon1.png" alt="logo" id="logo-img" style="width: 80px; height: 80px;">
         </a>
@@ -24,11 +24,11 @@
         <script>
             const logoImg = document.getElementById("logo-img");
             logoImg.addEventListener("mouseover", function () {
-            this.src = "../static/img/logo.png";
-           });
+                this.src = "../static/img/logo.png";
+            });
             logoImg.addEventListener("mouseout", function () {
-            this.src = "../static/img/icon1.png";
-           });
+                this.src = "../static/img/icon1.png";
+            });
         </script>
         <div class="nav-links">
             <a href="{{url_for('mypage.mypage')}}">マイページ</a>
@@ -41,15 +41,15 @@
     <div class="container">
         <!-- メインエリア -->
         <form action="{{url_for('absence_registration')}}" method="POST">
-            <div class="main">
+            <div class="all">
                 <h1>欠席登録</h1>
                 <div class="form-area">
-                <p><strong>科目名：</strong>{{name}}</p>
-                <label for="date"><strong>欠席日：{{ absent_date }}</strong></label>
-                <br>
-                <button class="submit-btn" onclick="window.history.back();">戻る</button>
-                <button class="submit-btn" type="submit">登録</button>
-            </div>
+                    <p><strong>科目名：</strong>{{name}}</p>
+                    <label for="date"><strong>欠席日：{{ absent_date }}</strong></label>
+                    <br>
+                    <button class="submit-btn" onclick="window.history.back();">戻る</button>
+                    <button class="submit-btn" type="submit">登録</button>
+                </div>
         </form>
     </div>
 </body>

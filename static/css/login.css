@@ -1,77 +1,77 @@
 body {
-    font-family: sans-serif;
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    margin: 0;
+  font-family: sans-serif;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin: 0;
 }
 
 .login-container {
-    margin-bottom: 150px;
-    border-radius: 10px;
-    width: 500px;
-    text-align: center;
+  margin-bottom: 150px;
+  border-radius: 10px;
+  width: 500px;
+  text-align: center;
 }
 
 input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .login-button {
-    background-color: #3dada7;
-            color: white;
-            border: none;
-            padding: 10px 40px;
-            font-size: 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  background-color: #3dada7;
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
 }
 
 .login-button:hover {
-    background-color: #2d8a86;
+  background-color: #2d8a86;
 }
 
 .POST {
-    margin-bottom: 100px
+  margin-bottom: 100px;
 }
 
 .links {
-    font-size: 32px;
-    /* position: fixed; */
-    bottom: 25%;
-    /* right: 15%;
+  font-size: 32px;
+  /* position: fixed; */
+  bottom: 25%;
+  /* right: 15%;
     text-align: right; */
-    text-decoration: underline;
-    text-decoration-color: orange;
+  text-decoration: underline;
+  text-decoration-color: orange;
 }
 
 .links a {
-    display: block;
-    font-size: 18px;
-    color: orange;
-    text-decoration: none;
-    margin-top: 40px;
-    margin-bottom: 5px
+  display: block;
+  font-size: 18px;
+  color: orange;
+  text-decoration: none;
+  margin-top: 40px;
+  margin-bottom: 5px;
 }
 
 .flash {
-    color: red;
-    margin-bottom: 15px;
+  color: red;
+  margin-bottom: 15px;
 }
 
 .login-button {
-    margin-top: 15px
+  margin-top: 15px;
 }
 
 h1 {
-    font-size: 32px;
+  font-size: 32px;
 }
