@@ -13,8 +13,14 @@
 }
 
 h1 {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+h2 {
   font-size: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -23,6 +29,7 @@ table {
   width: 100%;
   table-layout: fixed;
   border: 1px solid #ccc;
+  margin-bottom: 50px;
 }
 
 th,
@@ -34,7 +41,7 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   background-color: #ffffff;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 th {
@@ -62,13 +69,14 @@ th {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .review-box {
-  width: 400px;
-  height: 300px; /* 表示エリアの高さ */
+  width: 450px;
+  height: 300px;
   border: 1px solid #ccc;
   background-color: #fff;
   padding: 15px;
   overflow-y: scroll; /* 縦スクロールを有効に */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
 }
 
 .review-box ul {
@@ -88,4 +96,19 @@ th {
   right: 0;
   color: #aaa;
   font-size: 14px;
+}
+.reviewcon {
+  display: flex;
+  justify-content: space-between;
+}
+.review-buton {
+  background-color: #3dada7;
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
 }
