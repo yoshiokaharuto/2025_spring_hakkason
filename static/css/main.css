@@ -26,7 +26,7 @@ nav a:first-child {
 
 .container {
   display: flex;
-  padding: 120px;
+  padding: 80px;
   flex-wrap: nowrap;
 }
 

@@ -178,13 +178,18 @@ def create_review():
 @app.route('/absence_form')
 def absence_form():
     
+    user_id = session.get('user_id')
     id = request.args.get('id')
     session['absence_id'] = id
     result = db.syllabus_detail(id)
+    
+    timetable_id = db.get_timetable_id(id,user_id)
+    
+    attendance = db.attendance(timetable_id)
     session['subject_name'] = result[1]
     print(result)
     
-    return render_template('absence.html',result=result)
+    return render_template('absence.html',result=result,attendance=attendance)
 
 @app.route('/absence_exe', methods=['POST'])
 def absence_exe():

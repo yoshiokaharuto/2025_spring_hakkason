@@ -231,6 +231,21 @@ def absence(date, timetable_id):
             connection.close()
         return count
 
+def attendance(timetable_id):
+    sql="SELECT absent_date FROM attendances WHERE timetable_id = %s;"
+    
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    cursor.execute(sql, (timetable_id))
+    
+    result = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return result
+
 def get_timetable_id(subject_id, account_id):
     sql="SELECT timetable_id FROM timetable WHERE subject_id = %s AND account_id = %s;"
     
