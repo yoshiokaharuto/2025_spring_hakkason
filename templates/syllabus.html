@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <title>マイページ</title>
@@ -10,14 +9,10 @@
     <link rel="stylesheet" href="../static/css/allstyle.css">
     <link rel="stylesheet" href="../static/css/header.css">
     <link rel="stylesheet" href="../static/css/syllabus.css">
-
 </head>
-
-
-
 <body>
     <header>
-        <a href="" class="">
+        <a href="{{url_for('main')}}" class="">
             <img src="../static/img/icon1.png" alt="logo" id="logo-img" style="width: 80px; height: 80px;">
         </a>
         <!-- JSで画像の変更する -->
@@ -40,7 +35,6 @@
     </header>
     <div class="container">
         <h1>シラバス一覧</h1>
-
         <form method="get" action="/serch" class="search-box">
             <label>学則科目名：</label>
             <input type="text" name="semester_name" value="{{ request.args.get('semester_name', '') }}">
@@ -48,7 +42,6 @@
             <input type="text" name="subject_name" value="{{ request.args.get('subject_name', '') }}">
             <button type="submit">検索</button>
         </form>
-
         <table>
             <thead>
                 <tr>
@@ -79,5 +72,4 @@
         </table>
     </div>
 </body>
-
 </html>
