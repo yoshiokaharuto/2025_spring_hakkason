@@ -40,15 +40,15 @@
     </header>
     <div class="container">
         <!-- メインエリア -->
-        <form method="POST" action="{{url_for('Absence_registration')}}">
+        <form action="{{url_for('absence_registration')}}" method="POST">
             <div class="main">
                 <h1>欠席登録</h1>
                 <div class="form-area">
-                <p><strong>科目名：</strong>Java応用(Spring_boot)①</p>
+                <p><strong>科目名：</strong>{{name}}</p>
                 <label for="date"><strong>欠席日：{{ absent_date }}</strong></label>
                 <br>
                 <button class="submit-btn" onclick="window.history.back();">戻る</button>
-                <button class="submit-btn">登録</button>
+                <button class="submit-btn" type="submit">登録</button>
             </div>
         </form>
     </div>

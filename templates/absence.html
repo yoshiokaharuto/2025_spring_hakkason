@@ -38,11 +38,11 @@
 
     <div class="container">
         <!-- メインエリア -->
-        <form method="POST" action="{{url_for('Absence_exe')}}">
+        <form method="POST" action="{{url_for('absence_exe')}}">
             <div class="main">
                 <h1>欠席登録</h1>
                 <div class="form-area">
-                <p><strong>科目名：</strong>Java応用(Spring_boot)①</p>
+                <p><strong>科目名：</strong>{{result[1]}}</p>
                 <label for="date"><strong>欠席日：</strong></label>
                 <input type="date" id="date" name="absent_date">
                 <br>
