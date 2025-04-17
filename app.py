@@ -226,7 +226,9 @@ def complete_todo():
     else:
         error_message = "削除するTODOを選択してください。"
         todos = db.get_todos(session['user_id'])
-        return render_template('main.html', error=error_message, todos=todos)
+        timetable = db.get_timetable(session['user_id'])
+        timetable_map = {position: subject_name for subject_name, position in timetable}
+        return render_template('main.html', error=error_message, todos=todos, timetable_map=timetable_map)
 
 
 
