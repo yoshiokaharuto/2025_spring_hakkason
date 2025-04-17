@@ -122,7 +122,12 @@ def main():
                 "name": name
             }
         
-        return render_template('main.html', todos=todos,timetable_map=timetable_map)
+        subject_order = ['情報システム概論', 'システム開発演習', 'システム開発実践', 'キャリアデザイン']
+        my_credit_data = db.my_credit_data(session['user_id'])
+        my_dict = dict(my_credit_data)
+        my_data = [my_dict.get(subject, 0) for subject in subject_order]
+        
+        return render_template('main.html', todos=todos,timetable_map=timetable_map, my_data=my_data)
     else:
         return redirect(url_for('login'))
 
@@ -247,8 +252,6 @@ def complete_todo():
         timetable = db.get_timetable(session['user_id'])
         timetable_map = {position: subject_name for subject_name, position in timetable}
         return render_template('main.html', error=error_message, todos=todos, timetable_map=timetable_map)
-
-
 
 
 
