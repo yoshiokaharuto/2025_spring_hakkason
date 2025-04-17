@@ -34,7 +34,6 @@
 
   <div id="title"> 
     <h1>履修登録</h1>
-    <span class="highlight">2025後期履修登録</span>
   </div>
 
   <div class="container">
@@ -86,8 +85,6 @@
         </tbody>
       </table>
 
-      <button type="submit" class="submit-button">履修確定</button>
-
     </div>
     <div class="search-section">
      <form method="POST" action="{{ url_for('timetable.register_subject') }}">
@@ -98,7 +95,7 @@
         </label>
        {% endfor %}
       </div>
-
+      <button type="submit" class="submit-button">履修確定</button>
  
 </form>
 

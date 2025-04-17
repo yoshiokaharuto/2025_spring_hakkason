@@ -27,6 +27,7 @@ nav a:first-child {
 .container {
   display: flex;
   padding: 120px;
+  flex-wrap: nowrap;
 }
 
 .left {
@@ -36,6 +37,7 @@ nav a:first-child {
 .right {
   flex: 1;
   padding-left: 40px;
+  min-width: 300px;
 }
 
 #date {
@@ -60,11 +62,8 @@ nav a:first-child {
   padding: 10px 0;
 }
 
-.mon { margin-left: 35px; }
-.tue { margin-left: 2px; }
-.wed { margin-left: 4px; }
-.thu { margin-left: 2px; }
-.fri { margin-right: 10px; }
+.mon { margin-left: 50px; }
+.tue, .wed, .thu, .fri { margin-left: 0px; }
 
 .days-row div {
   display: table-cell;
@@ -72,16 +71,17 @@ nav a:first-child {
   padding: 10px 0;
 }
 
-/* 時間割本体 */
+/* 時間割ラッパー */
 .timetable-wrapper {
   display: flex;
   align-items: start;
+  flex-shrink: 0;
 }
 
 /* 時間列 */
 .time-column {
-  width: 60px;
-  font-size: 14px;
+  width: 80px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -98,28 +98,28 @@ nav a:first-child {
 }
 
 .time-column .first-time { margin-top: 0px; }
-.time-column .second-time { margin-top: 60px; }
-.time-column .third-time { margin-top: 65px; }
-.time-column .fourth-time { margin-top: 65px; }
+.time-column .second-time { margin-top: 80px; }
+.time-column .third-time { margin-top: 80px; }
+.time-column .fourth-time { margin-top: 85px; }
 
 /* 時間割テーブル */
 .timetable {
   border-collapse: collapse;
   background-color: white;
-  width: 100%;
+  width: 800px;
+  table-layout: fixed;
 }
 
 .timetable td {
   border: 1px solid #000;
   text-align: center;
-  padding: 10px;
-  min-width: 100px;
-  height: 100px;
-  position: relative;
+  padding: 15px;
+  min-width: 120px;
+  height: 120px;
   word-break: break-word;
+  font-size: 18px;
   overflow-wrap: break-word;
   white-space: pre-wrap;
-  font-size: 15px;
 }
 
 /* セル内にul/liがある場合の対応 */
@@ -206,4 +206,38 @@ nav a:first-child {
 .attendance-box p {
   margin: 5px 0;
   font-size: 20px;
+}
+
+/* タイトル */
+#title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* 送信ボタン（右下固定） */
+.submit-button {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4db6ac;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.submit-button:hover {
+  background-color: #2d8a86;
 }

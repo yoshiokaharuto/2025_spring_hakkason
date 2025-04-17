@@ -6,22 +6,15 @@ body {
 }
 
 #title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px 50px;
+  flex: 0;
+  margin-top: 70px;
+  margin-right: 130px;
+  text-align: center;
 }
 
 h1 {
   margin: 0;
   margin-bottom: 30px;
-}
-
-.highlight {
-  color: #f5a623;
-  font-size: 18px;
-  margin-top: 5px;
-  margin-left: 100px;
 }
 
 .container {
@@ -71,21 +64,11 @@ h1 {
   margin: 5px 0;
 }
 
-
-
-.search-button {
-  padding: 10px 16px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
+  margin-top: 60px;
 }
 
 th, td {
@@ -113,8 +96,9 @@ td li {
 }
 
 .submit-button {
-  display: block;
-  margin: 18px auto;
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4db6ac;
@@ -123,7 +107,10 @@ td li {
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
+
+
 
 .submit-button:hover {
   background-color: #2d8a86;
