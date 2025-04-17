@@ -7,7 +7,12 @@ syllabus_bp = Blueprint('syllabus',__name__)
 def syllabus_detail():
     
     id = request.args.get('id')
+    if not id:
+        id = session.get('subject_id')
     detail_data = db.syllabus_detail(id)
+
+        
+    session['subject_id'] = detail_data[0]
     prev_data = db.previous_data(id)
     review_list = db.review_list(id)
     
@@ -25,7 +30,7 @@ def syllabus_detail():
     for i, key in enumerate(keys)
     }
     
-    session['subject_id'] = detail_data[0]
+
     
     
     return render_template('sllabusconfirm.html',detail_data=detail_data,prev_data=prev_data,review_list=review_list,ave=ave)
