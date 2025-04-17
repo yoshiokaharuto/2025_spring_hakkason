@@ -62,7 +62,7 @@ nav a:first-child {
   padding: 10px 0;
 }
 
-.mon { margin-left: 50px; }
+.mon { margin-left: 28px; }
 .tue, .wed, .thu, .fri { margin-left: 0px; }
 
 .days-row div {
@@ -106,21 +106,21 @@ nav a:first-child {
 .timetable {
   border-collapse: collapse;
   background-color: white;
-  width: 800px;
+  width: auto;
   table-layout: fixed;
 }
 
 .timetable td {
   border: 1px solid #000;
   text-align: center;
-  padding: 15px;
-  min-width: 120px;
+  width: 500px;
   height: 120px;
+  padding: 0;
   word-break: break-word;
-  font-size: 18px;
+  font-size: 16px;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
 }
+
 
 /* セル内にul/liがある場合の対応 */
 .timetable td ul {
