@@ -71,20 +71,25 @@
 
       <!-- 表本体 -->
       <table class="timetable">
-        {% set day_labels = ['mon', 'tue', 'wed', 'thu', 'fri'] %}
-        {% set rows = 4 %}
-        {% set cols = 5 %}
-        {% for row in range(rows) %}
-        <tr>
-          {% for col in range(cols) %}
-          {% set position = col * rows + row + 1 %}
-          <td>
-            {{ timetable_map.get(position, '') }}
-          </td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
-      </table>
+  {% set rows = 4 %}
+  {% set cols = 5 %}
+  {% for row in range(rows) %}
+    <tr>
+      {% for col in range(cols) %}
+        {% set position = col * rows + row + 1 %}
+        {% set cell = timetable_map.get(position) %}
+        <td>
+          {% if cell %}
+          <a class="subject_name" href="{{ url_for('absence_form') }}?id={{ cell.subject_id }}">
+            {{ cell.name }}
+          </a>
+        {% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+
     </div>
   </div>
 

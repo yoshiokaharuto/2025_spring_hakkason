@@ -241,3 +241,7 @@ h1 {
 .submit-button:hover {
   background-color: #2d8a86;
 }
+
+.subject_name{
+  text-decoration: none;
+}
