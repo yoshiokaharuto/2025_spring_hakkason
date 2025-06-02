@@ -126,3 +126,10 @@ th {
   padding: 20px;
   margin-left: 10px;
 }
+.circle-wrapper svg circle.exceed-line {
+  stroke: #2c6b6c; /* より濃い色 */
+  opacity: 1;
+  stroke-width: 15;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease;
+}

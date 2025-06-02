@@ -24,7 +24,7 @@ dictSubject.forEach((item, index) => {
 });
 
 // データ数が奇数なら、右側に空行追加
-if (data.length % 2 !== 0) {
+if (dictSubject.length % 2 !== 0) {
   const emptyRow = document.createElement("tr");
   emptyRow.innerHTML = `
       <td colspan="4" style="height: 53px;"></td>
