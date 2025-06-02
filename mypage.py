@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, Blueprint, request, session, flash,jsonify
-import db,json
+import db_access,json
 
 mypage_bp = Blueprint('mypage', __name__)
 
@@ -8,11 +8,10 @@ mypage_bp = Blueprint('mypage', __name__)
 def mypage():
     
     account_id = session.get('user_id')
-    account_data = db.get_account_data(account_id)
-    subject_data = db.subject_data(account_id)
-    credit_data = db.credit_data(account_id)
-    my_credit_data = db.my_credit_data(account_id)
-    
+    account_data = db_access.get_account_data(account_id)
+    subject_data = db_access.subject_data(account_id)
+    credit_data = db_access.credit_data(account_id)
+    my_credit_data = db_access.my_credit_data(account_id)
     keys = ['subject_name', 'credit','attendance']
     dict_subject = [dict(zip(keys, row)) for row in subject_data]
     

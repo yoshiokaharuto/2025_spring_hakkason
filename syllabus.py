@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, Blueprint, request, session, flash,jsonify
-import db,json
+import db_access,json
 
 syllabus_bp = Blueprint('syllabus',__name__)
 
@@ -9,12 +9,12 @@ def syllabus_detail():
     id = request.args.get('id')
     if not id:
         id = session.get('subject_id')
-    detail_data = db.syllabus_detail(id)
+    detail_data = db_access.syllabus_detail(id)
 
         
     session['subject_id'] = detail_data[0]
-    prev_data = db.previous_data(id)
-    review_list = db.review_list(id)
+    prev_data = db_access.previous_data(id)
+    review_list = db_access.review_list(id)
     
     keys = ["difficulty", "assignment", "interest", "speed", "understanding"]
     

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, Blueprint, request, session, flash,jsonify
-import db,json
+import db_access,json
 
 
 timetable_bp = Blueprint('timetable', __name__)
@@ -7,7 +7,7 @@ timetable_bp = Blueprint('timetable', __name__)
 @timetable_bp.route('/course_register', methods=['GET'])
 def course_register():
     
-    subject_list = db.get_subjects()
+    subject_list = db_access.get_subjects()
     
     keys = ['id', 'name', 'teacher', 'schedule']
     dict_list = [dict(zip(keys, row)) for row in subject_list]
@@ -21,7 +21,7 @@ def register_subject():
     subject_data = request.form.getlist('subjects')
     
     for data in subject_data:
-        success = db.register_subject(user_id,data)
+        success = db_access.register_subject(user_id,data)
         if not success:
             return redirect(url_for('timetable.course_register'))
     return redirect(url_for('main'))

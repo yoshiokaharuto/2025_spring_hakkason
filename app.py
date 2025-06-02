@@ -1,12 +1,20 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-import db, string, random, re
+import db_access, string, random, re
 from timetable import timetable_bp
 from mypage import mypage_bp
 from syllabus import syllabus_bp
 from datetime import timedelta
-
+from flask_migrate import Migrate
+from config import Config
+from models import db
 
 app = Flask(__name__)
+app.config.from_object(Config)
+
+# DB の初期化
+db.init_app(app)
+migrate = Migrate(app, db)
+
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
 
 app.register_blueprint(timetable_bp)
@@ -70,7 +78,7 @@ def register_complete():
     grade = session.get('grade')
     department_id = session.get('department_id')
 
-    count = db.insert_user(name, email, password, grade, department_id)
+    count = db_access.insert_user(name, email, password, grade, department_id)
 
     if count == 1:
         msg = '登録が完了しました。'
@@ -97,8 +105,8 @@ def login():
     if error:
         return render_template('login.html', error=error)
 
-    if db.login(email, password):
-        account = db.select_user(email)
+    if db_access.login(email, password):
+        account = db_access.select_user(email)
         session['user'] = True
         session['user_id'] = account[0]
         session.permanent = True
@@ -112,8 +120,8 @@ def login():
 @app.route('/main', methods=['GET','POST'])
 def main():
     if 'user' in session:
-        todos = db.get_todos(session['user_id'])
-        timetable = db.get_timetable(session['user_id'])
+        todos = db_access.get_todos(session['user_id'])
+        timetable = db_access.get_timetable(session['user_id'])
         
         timetable_map = {}
         for subject_id, name, position in timetable:
@@ -123,7 +131,7 @@ def main():
             }
         
         subject_order = ['情報システム概論', 'システム開発演習', 'システム開発実践', 'キャリアデザイン']
-        my_credit_data = db.my_credit_data(session['user_id'])
+        my_credit_data = db_access.my_credit_data(session['user_id'])
         my_dict = dict(my_credit_data)
         my_data = [my_dict.get(subject, 0) for subject in subject_order]
         
@@ -142,14 +150,14 @@ def logout():
 
 @app.route('/syllabus', methods=['GET'])
 def syllabus():
-    subjects = db.syllabus()
+    subjects = db_access.syllabus()
     return render_template('syllabus.html', subjects=subjects)
 
 @app.route('/serch', methods=['GET'])
 def serch():
     semester_name = request.args.get('semester_name', '')
     subject_name = request.args.get('subject_name', '')
-    subjects = db.search(semester_name, subject_name)
+    subjects = db_access.search(semester_name, subject_name)
     return render_template('syllabus.html', subjects=subjects)
 
 
@@ -167,7 +175,7 @@ def create_review():
     interest = request.form.get('interest')
     understanding = request.form.get('understanding')
     assignment = request.form.get('assignment')
-    count = db.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
+    count = db_access.review(user_id,sub_id,content,difficulty,speed,interest, understanding,assignment)
 
     if count == 1:
         return redirect(url_for('syllabus.syllabus_detail'))
@@ -181,11 +189,11 @@ def absence_form():
     user_id = session.get('user_id')
     id = request.args.get('id')
     session['absence_id'] = id
-    result = db.syllabus_detail(id)
+    result = db_access.syllabus_detail(id)
     
-    timetable_id = db.get_timetable_id(id,user_id)
+    timetable_id = db_access.get_timetable_id(id,user_id)
     
-    attendance = db.attendance(timetable_id)
+    attendance = db_access.attendance(timetable_id)
     session['subject_name'] = result[1]
     print(result)
     
@@ -206,9 +214,9 @@ def absence_registration():
     subject_id = session.get('absence_id')
     account_id = session.get('user_id')
     
-    timetable_id = db.get_timetable_id(subject_id, account_id)
+    timetable_id = db_access.get_timetable_id(subject_id, account_id)
     print(timetable_id)
-    count = db.absence(absent_date,timetable_id)
+    count = db_access.absence(absent_date,timetable_id)
     if count == 1:
         session.pop('subject_name', None)
         session.pop('absent_date', None)
@@ -229,16 +237,13 @@ def todo():
         account_id = session['user_id']
 
         if deadline and todo_text:
-            db.insert_todo(deadline, todo_text, account_id)
+            db_access.insert_todo(deadline, todo_text, account_id)
             return redirect(url_for('main'))
         else:
             error_message = "期限とTODO内容の両方を入力してください。"
             return render_template('todo_register.html', error=error_message)
     else:
         return render_template('todo_register.html')
-
-    
-
 
 @app.route('/complete_todo', methods=['POST'])
 def complete_todo():
@@ -249,18 +254,14 @@ def complete_todo():
 
     if todo_ids:
         for todo_id in todo_ids:
-            db.delete_todo_by_id(todo_id, session['user_id'])  
+            db_access.delete_todo_by_id(todo_id, session['user_id'])  
         return redirect(url_for('main'))
     else:
         error_message = "削除するTODOを選択してください。"
-        todos = db.get_todos(session['user_id'])
-        timetable = db.get_timetable(session['user_id'])
+        todos = db_access.get_todos(session['user_id'])
+        timetable = db_access.get_timetable(session['user_id'])
         timetable_map = {position: subject_name for subject_name, position in timetable}
         return render_template('main.html', error=error_message, todos=todos, timetable_map=timetable_map)
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
